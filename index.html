@@ -1,0 +1,227 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-1QVWYTCEP1"></script>
+    <script>
+        window.dataLayer = window.dataLayer || [];
+        function gtag() { dataLayer.push(arguments); }
+        gtag('js', new Date());
+        gtag('config', 'G-1QVWYTCEP1');
+    </script>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>H. Čanić — Coming Soon</title>
+    <meta name="description" content="Husejin Čanić, Husejin Canic, hcanic." />
+    <meta name="keywords" content="hcanic, husejin čanić, husejin canic, husejin c." />
+    <meta name="author" content="H. Čanić" />
+    <meta name="robots" content="index, follow" />
+    <meta property="og:title" content="H. Čanić — Coming Soon" />
+    <meta property="og:description" content="Husejin Čanić, Husejin Canic, hcanic." />
+    <meta property="og:type" content="website" />
+    <meta property="og:url" content="https://hcanic.github.io" />
+    <link rel="icon"
+        href="data:image/svg+xml,  <svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'>    <rect width='100' height='100' fill='white'/>    <text x='50%' y='68%' font-size='60' text-anchor='middle' fill='black' font-family='Playfair Display, serif'>HC</text>  </svg>"
+        type="image/svg+xml">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@500&family=Inter:wght@300;400&display=swap"
+        rel="stylesheet">
+    <style>
+        :root {
+            --bg: #f5f4f0;
+            --text: #222;
+            --text-soft: #666;
+            --accent: #b8a47e;
+            --font-display: 'Playfair Display', serif;
+            --font-body: 'Inter', sans-serif;
+        }
+        *,
+        *::before,
+        *::after {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        body {
+            background-color: var(--bg);
+            color: var(--text);
+            font-family: var(--font-body);
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            text-align: center;
+            justify-content: space-between;
+            position: relative;
+        }
+        #main-content {
+            padding: 0 5vw;
+            max-width: 500px;
+            width: 100%;
+            margin-top: auto;
+            margin-bottom: auto;
+            transition: opacity 0.5s;
+        }
+        h1 {
+            font-family: var(--font-display);
+            font-size: clamp(2rem, 5vw, 2.8rem);
+            margin-bottom: 1rem;
+            letter-spacing: 0.1em;
+            font-weight: 500;
+        }
+        p {
+            font-size: 1.1rem;
+            color: var(--text-soft);
+            margin-bottom: 0.5rem;
+        }
+        .line {
+            width: 100%;
+            height: 2px;
+            background: var(--accent);
+            margin: 1.5rem auto;
+        }
+        
+        #contactBtn {
+            position: absolute;
+            bottom: 30px;
+            left: 50%;
+            transform: translateX(-50%);
+            
+            font-size: 0.9rem;
+            color: var(--accent);
+            text-decoration: none;
+            cursor: pointer;
+            letter-spacing: 0.05em;
+            font-weight: 500;
+
+            transition: all 0.7s ease-in-out;
+            will-change: transform, color;
+        }
+
+        #revealContainer {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            width: 100%;
+            max-width: 650px;
+            opacity: 0;
+            pointer-events: none;
+            transition: opacity 0.5s;
+        }
+
+        #revealContainer.active {
+            opacity: 1;
+            pointer-events: all;
+        }
+
+        #revealedEmail {
+            font-family: var(--font-display);
+            font-size: clamp(2rem, 5vw, 2.8rem); 
+            color: var(--text);
+            letter-spacing: 0.1em;
+            display: block;
+        }
+
+        .line-wrapper {
+            padding: 0 5vw;
+        }
+
+        .line-wrapper .line:first-child {
+            margin: 1.5rem auto 0.5rem auto;
+        }
+        .line-wrapper .line:last-child {
+            margin: 0.5rem auto 1.5rem auto;
+        }
+
+        .hidden-content {
+            opacity: 0 !important;
+            pointer-events: none !important;
+        }
+
+        footer {
+            width: 100%;
+            padding-bottom: 30px;
+            padding-top: 20px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+    </style>
+</head>
+<body>
+    <div id="main-content">
+        <h1 id="main-title">H. Čanić</h1>
+        <div id="main-line" class="line"></div>
+        <p id="main-text">Coming soon.</p>
+    </div>
+    
+    <div id="revealContainer">
+        <div class="line-wrapper">
+            <div id="top-reveal-line" class="line"></div>
+            <span id="revealedEmail"></span>
+            <div id="bottom-reveal-line" class="line"></div>
+        </div>
+    </div>
+    
+    <a id="contactBtn" 
+       data-email-user="hcanic" 
+       data-email-domain="proton"
+       data-email-tld="me">
+       Contact
+    </a>
+
+    <footer></footer>
+
+    <script>
+        const body = document.body;
+        const mainContent = document.getElementById('main-content');
+        const contactBtn = document.getElementById('contactBtn');
+        const revealContainer = document.getElementById('revealContainer');
+        const revealedEmail = document.getElementById('revealedEmail');
+        
+        function revealEmail(e) {
+            e.preventDefault(); 
+            
+            mainContent.classList.add('hidden-content');
+            contactBtn.classList.add('hidden-content');
+
+            setTimeout(() => {
+                const user = contactBtn.getAttribute('data-email-user');
+                const domain = contactBtn.getAttribute('data-email-domain');
+                const tld = contactBtn.getAttribute('data-email-tld');
+                
+                const protectedEmail = user + '&#64;' + domain + '&#46;' + tld; 
+
+                revealedEmail.innerHTML = protectedEmail;
+                revealContainer.classList.add('active');
+
+                contactBtn.removeEventListener('click', revealEmail);
+                
+                body.addEventListener('click', closeEmail);
+            }, 50); 
+        }
+
+        function closeEmail(e) {
+            if (e.target.id === 'revealedEmail') {
+                return; 
+            }
+            
+            if (!revealContainer.classList.contains('active')) {
+                return;
+            }
+
+            revealContainer.classList.remove('active');
+            
+            mainContent.classList.remove('hidden-content');
+            contactBtn.classList.remove('hidden-content');
+
+            body.removeEventListener('click', closeEmail);
+            
+            contactBtn.addEventListener('click', revealEmail);
+        }
+
+        contactBtn.addEventListener('click', revealEmail);
+    </script>
+</body>
+</html>

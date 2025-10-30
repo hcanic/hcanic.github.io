@@ -1,0 +1,5 @@
+User-agent: *
+Allow: /index.html
+
+Sitemap: https://hcanic.github.io/sitemap.xml
+Host: https://hcanic.github.io

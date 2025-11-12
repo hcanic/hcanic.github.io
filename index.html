@@ -120,7 +120,7 @@
             font-size: clamp(2rem, 5vw, 2.8rem); 
             color: var(--text);
             letter-spacing: 0.1em;
-            display: block;
+            display: none;
         }
 
         .line-wrapper {
@@ -147,6 +147,86 @@
             justify-content: center;
             align-items: center;
         }
+
+        /* Contact form styles */
+        .contact-form {
+            width: 100%;
+        }
+
+        .form-group {
+            margin-bottom: 1.5rem;
+            text-align: left;
+        }
+
+        label {
+            display: block;
+            font-size: 0.9rem;
+            color: var(--text-soft);
+            margin-bottom: 0.5rem;
+            letter-spacing: 0.05em;
+        }
+
+        input[type="email"],
+        input[type="text"],
+        textarea {
+            width: 100%;
+            padding: 0.75rem;
+            font-family: var(--font-body);
+            font-size: 1rem;
+            color: var(--text);
+            background-color: transparent;
+            border: none;
+            border-bottom: 1px solid var(--accent);
+            outline: none;
+            transition: border-color 0.3s;
+        }
+
+        input[type="email"]:focus,
+        input[type="text"]:focus,
+        textarea:focus {
+            border-bottom-color: var(--text);
+        }
+
+        textarea {
+            resize: vertical;
+            min-height: 120px;
+        }
+
+        .submit-btn {
+            width: 100%;
+            padding: 0.9rem;
+            font-family: var(--font-body);
+            font-size: 0.95rem;
+            font-weight: 500;
+            letter-spacing: 0.05em;
+            color: var(--bg);
+            background-color: var(--accent);
+            border: none;
+            cursor: pointer;
+            transition: all 0.3s;
+            margin-top: 0.5rem;
+        }
+
+        .submit-btn:hover {
+            background-color: var(--text);
+        }
+
+        .submit-btn:disabled {
+            opacity: 0.5;
+            cursor: not-allowed;
+        }
+
+        .success-message {
+            font-family: var(--font-display);
+            font-size: 1.5rem;
+            color: var(--text);
+            letter-spacing: 0.1em;
+            display: none;
+        }
+
+        .success-message.show {
+            display: block;
+        }
     </style>
 </head>
 <body>
@@ -159,17 +239,35 @@
     <div id="revealContainer">
         <div class="line-wrapper">
             <div id="top-reveal-line" class="line"></div>
-            <span id="revealedEmail"></span>
+            
+            <form id="contactForm" class="contact-form" action="https://formspree.io/f/mdkyoblb" method="POST" style="display: none;">
+                <div class="form-group">
+                    <label for="email">Your email</label>
+                    <input type="email" id="email" name="email" required>
+                </div>
+                
+                <div class="form-group">
+                    <label for="subject">Subject</label>
+                    <input type="text" id="subject" name="_subject" required>
+                </div>
+                
+                <div class="form-group">
+                    <label for="message">Your message</label>
+                    <textarea id="message" name="message" required></textarea>
+                </div>
+                
+                <button type="submit" class="submit-btn">Send</button>
+            </form>
+
+            <div class="success-message" id="successMessage">
+                Message sent successfully.
+            </div>
+            
             <div id="bottom-reveal-line" class="line"></div>
         </div>
     </div>
     
-    <a id="contactBtn" 
-       data-email-user="hcanic" 
-       data-email-domain="proton"
-       data-email-tld="me">
-       Contact
-    </a>
+    <a id="contactBtn">Contact</a>
 
     <footer></footer>
 
@@ -178,33 +276,28 @@
         const mainContent = document.getElementById('main-content');
         const contactBtn = document.getElementById('contactBtn');
         const revealContainer = document.getElementById('revealContainer');
-        const revealedEmail = document.getElementById('revealedEmail');
+        const contactForm = document.getElementById('contactForm');
+        const successMessage = document.getElementById('successMessage');
         
-        function revealEmail(e) {
+        function showContactForm(e) {
             e.preventDefault(); 
             
             mainContent.classList.add('hidden-content');
             contactBtn.classList.add('hidden-content');
 
             setTimeout(() => {
-                const user = contactBtn.getAttribute('data-email-user');
-                const domain = contactBtn.getAttribute('data-email-domain');
-                const tld = contactBtn.getAttribute('data-email-tld');
-                
-                const protectedEmail = user + '&#64;' + domain + '&#46;' + tld; 
-
-                revealedEmail.innerHTML = protectedEmail;
+                contactForm.style.display = 'block';
                 revealContainer.classList.add('active');
 
-                contactBtn.removeEventListener('click', revealEmail);
+                contactBtn.removeEventListener('click', showContactForm);
                 
-                body.addEventListener('click', closeEmail);
+                body.addEventListener('click', closeContactForm);
             }, 50); 
         }
 
-        function closeEmail(e) {
-            if (e.target.id === 'revealedEmail') {
-                return; 
+        function closeContactForm(e) {
+            if (revealContainer.contains(e.target)) {
+                return;
             }
             
             if (!revealContainer.classList.contains('active')) {
@@ -216,12 +309,66 @@
             mainContent.classList.remove('hidden-content');
             contactBtn.classList.remove('hidden-content');
 
-            body.removeEventListener('click', closeEmail);
+            body.removeEventListener('click', closeContactForm);
             
-            contactBtn.addEventListener('click', revealEmail);
+            setTimeout(() => {
+                contactForm.style.display = 'none';
+                contactForm.reset();
+                successMessage.classList.remove('show');
+            }, 500);
+            
+            contactBtn.addEventListener('click', showContactForm);
         }
 
-        contactBtn.addEventListener('click', revealEmail);
+        contactForm.addEventListener('submit', async function(e) {
+            e.preventDefault();
+            
+            const submitBtn = contactForm.querySelector('.submit-btn');
+            submitBtn.disabled = true;
+            submitBtn.textContent = 'Sending...';
+            
+            const formData = new FormData(contactForm);
+            
+            try {
+                const response = await fetch(contactForm.action, {
+                    method: 'POST',
+                    body: formData,
+                    headers: {
+                        'Accept': 'application/json'
+                    }
+                });
+                
+                if (response.ok) {
+                    contactForm.style.display = 'none';
+                    successMessage.classList.add('show');
+                    
+                    setTimeout(() => {
+                        revealContainer.classList.remove('active');
+                        mainContent.classList.remove('hidden-content');
+                        contactBtn.classList.remove('hidden-content');
+                        
+                        setTimeout(() => {
+                            contactForm.reset();
+                            contactForm.style.display = 'none';
+                            successMessage.classList.remove('show');
+                            submitBtn.disabled = false;
+                            submitBtn.textContent = 'Send';
+                        }, 500);
+                        
+                        body.removeEventListener('click', closeContactForm);
+                        contactBtn.addEventListener('click', showContactForm);
+                    }, 2500);
+                } else {
+                    throw new Error('Form submission failed');
+                }
+            } catch (error) {
+                alert('There was an error sending your message. Please try again.');
+                submitBtn.disabled = false;
+                submitBtn.textContent = 'Send';
+            }
+        });
+
+        contactBtn.addEventListener('click', showContactForm);
     </script>
 </body>
 </html>

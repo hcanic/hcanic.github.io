@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="hr">
+<html lang="en">
 
 <head>
     <script async src="https://www.googletagmanager.com/gtag/js?id=G-1QVWYTCEP1"></script>
@@ -20,11 +20,20 @@
     <meta property="og:description" content="Husejin Čanić, Husejin Canic, hcanic." />
     <meta property="og:type" content="website" />
     <meta property="og:url" content="https://hcanic.github.io" />
+    <meta property="og:image" content="https://hcanic.github.io/og-image.png" />
+    <meta property="og:image:width" content="1200" />
+    <meta property="og:image:height" content="630" />
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:title" content="H. Čanić" />
+    <meta name="twitter:description" content="Husejin Čanić, Husejin Canic, hcanic." />
+    <meta name="twitter:image" content="https://hcanic.github.io/og-image.png" />
     <link rel="icon"
         href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><rect width='100' height='100' fill='white'/><text x='50%' y='68%' font-size='60' text-anchor='middle' fill='black' font-family='Playfair Display, serif'>HC</text></svg>"
         type="image/svg+xml">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link rel="preload" as="style"
+        href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@300;500&family=Inter:wght@300;400;500&display=swap">
     <link
         href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@300;500&family=Inter:wght@300;400;500&display=swap"
         rel="stylesheet">
@@ -46,7 +55,38 @@
             }
         }
     </script>
+    <script type="application/ld+json">
+    {
+        "@context": "https://schema.org",
+        "@type": "Person",
+        "name": "Husejin Čanić",
+        "url": "https://hcanic.github.io",
+        "sameAs": [
+            "https://facebook.com/hcanic",
+            "https://linkedin.com/in/husejin/"
+        ]
+    }
+    </script>
     <style>
+        html {
+            scroll-behavior: smooth;
+        }
+
+        @media (prefers-reduced-motion: reduce) {
+
+            *,
+            *::before,
+            *::after {
+                animation-duration: 0.01ms !important;
+                animation-iteration-count: 1 !important;
+                transition-duration: 0.01ms !important;
+            }
+
+            html {
+                scroll-behavior: auto;
+            }
+        }
+
         @keyframes float {
 
             0%,
@@ -163,11 +203,88 @@
             opacity: 1;
             pointer-events: all;
         }
+
+        /* Focus states */
+        a:focus-visible,
+        button:focus-visible,
+        input:focus-visible,
+        textarea:focus-visible {
+            outline: 2px solid #d4af64;
+            outline-offset: 2px;
+        }
+
+        .social-link:focus-visible {
+            outline: 2px solid #d4af64;
+            outline-offset: 4px;
+        }
+
+        @keyframes checkmark {
+            0% {
+                transform: scale(0) rotate(45deg);
+                opacity: 0;
+            }
+
+            50% {
+                transform: scale(1.2) rotate(45deg);
+            }
+
+            100% {
+                transform: scale(1) rotate(45deg);
+                opacity: 1;
+            }
+        }
+
+        .checkmark {
+            width: 80px;
+            height: 80px;
+            margin: 0 auto 20px;
+            border-radius: 50%;
+            border: 3px solid #d4af64;
+            position: relative;
+            animation: checkmark 0.6s ease-out;
+        }
+
+        .checkmark::after {
+            content: '';
+            position: absolute;
+            top: 20px;
+            left: 30px;
+            width: 20px;
+            height: 35px;
+            border: solid #d4af64;
+            border-width: 0 3px 3px 0;
+            transform: rotate(45deg);
+        }
+
+        input:invalid:not(:placeholder-shown) {
+            border-color: #ef4444;
+        }
+
+        input:valid:not(:placeholder-shown) {
+            border-color: #10b981;
+        }
+
+        .spinner {
+            width: 20px;
+            height: 20px;
+            border: 2px solid rgba(255, 255, 255, 0.3);
+            border-top-color: white;
+            border-radius: 50%;
+            animation: spin 0.6s linear infinite;
+            display: inline-block;
+            margin-right: 8px;
+        }
+
+        @keyframes spin {
+            to {
+                transform: rotate(360deg);
+            }
+        }
     </style>
 </head>
 
 <body
-    class="min-h-screen flex items-center justify-center bg-gradient-to-br from-warm-dark to-warm-dark-light text-white overflow-hidden relative font-body">
+    class="min-h-screen supports-[height:100dvh]:min-h-dvh flex items-center justify-center bg-gradient-to-br from-warm-dark to-warm-dark-light text-white overflow-hidden relative font-body">
     <div class="absolute w-full h-full overflow-hidden z-0">
         <div class="circle"></div>
         <div class="circle"></div>
@@ -266,6 +383,76 @@
         const revealContainer = document.getElementById('revealContainer');
         const contactForm = document.getElementById('contactForm');
         const successMessage = document.getElementById('successMessage');
+        const emailInput = document.getElementById('email');
+        const circles = document.querySelectorAll('.circle');
+
+        let mouseX = 0, mouseY = 0;
+        const isTouchDevice = 'ontouchstart' in window || navigator.maxTouchPoints > 0;
+
+        if (!isTouchDevice) {
+            document.addEventListener('mousemove', (e) => {
+                mouseX = (e.clientX / window.innerWidth) * 2 - 1;
+                mouseY = (e.clientY / window.innerHeight) * 2 - 1;
+
+                circles.forEach((circle, index) => {
+                    const speed = (index + 1) * 5;
+                    const x = mouseX * speed;
+                    const y = mouseY * speed;
+                    circle.style.transform = `translate(${x}px, ${y}px)`;
+                });
+            });
+        }
+
+        document.addEventListener('keydown', (e) => {
+            if (e.key === 'Escape' && revealContainer.classList.contains('active')) {
+                closeContactForm();
+            }
+        });
+
+        let touchStartY = 0;
+        let touchEndY = 0;
+
+        if (isTouchDevice) {
+            revealContainer.addEventListener('touchstart', (e) => {
+                touchStartY = e.changedTouches[0].screenY;
+            });
+
+            revealContainer.addEventListener('touchend', (e) => {
+                touchEndY = e.changedTouches[0].screenY;
+                handleSwipe();
+            });
+
+            function handleSwipe() {
+                const swipeDistance = touchEndY - touchStartY;
+                if (swipeDistance > 100) {
+                    closeContactForm();
+                }
+            }
+        }
+
+        function trapFocus(element) {
+            const focusableElements = element.querySelectorAll(
+                'button, input, textarea, [tabindex]:not([tabindex="-1"])'
+            );
+            const firstFocusable = focusableElements[0];
+            const lastFocusable = focusableElements[focusableElements.length - 1];
+
+            element.addEventListener('keydown', function (e) {
+                if (e.key === 'Tab') {
+                    if (e.shiftKey) {
+                        if (document.activeElement === firstFocusable) {
+                            lastFocusable.focus();
+                            e.preventDefault();
+                        }
+                    } else {
+                        if (document.activeElement === lastFocusable) {
+                            firstFocusable.focus();
+                            e.preventDefault();
+                        }
+                    }
+                }
+            });
+        }
 
         function showContactForm(e) {
             e.preventDefault();
@@ -276,6 +463,10 @@
                 contactForm.style.display = 'block';
                 revealContainer.classList.add('active');
 
+                emailInput.focus();
+
+                trapFocus(revealContainer);
+
                 contactIconBtn.removeEventListener('click', showContactForm);
 
                 body.addEventListener('click', closeContactForm);
@@ -283,28 +474,26 @@
         }
 
         function closeContactForm(e) {
-            if (revealContainer.contains(e.target)) {
-                return;
+            if (!e || !revealContainer.contains(e.target)) {
+                if (!revealContainer.classList.contains('active')) {
+                    return;
+                }
+
+                revealContainer.classList.remove('active');
+
+                mainContent.classList.remove('hidden-content');
+
+                body.removeEventListener('click', closeContactForm);
+
+                setTimeout(() => {
+                    contactForm.style.display = 'none';
+                    contactForm.reset();
+                    successMessage.classList.remove('show');
+                    successMessage.classList.add('hidden');
+                }, 500);
+
+                contactIconBtn.addEventListener('click', showContactForm);
             }
-
-            if (!revealContainer.classList.contains('active')) {
-                return;
-            }
-
-            revealContainer.classList.remove('active');
-
-            mainContent.classList.remove('hidden-content');
-
-            body.removeEventListener('click', closeContactForm);
-
-            setTimeout(() => {
-                contactForm.style.display = 'none';
-                contactForm.reset();
-                successMessage.classList.remove('show');
-                successMessage.classList.add('hidden');
-            }, 500);
-
-            contactIconBtn.addEventListener('click', showContactForm);
         }
 
         contactForm.addEventListener('submit', async function (e) {
@@ -312,7 +501,8 @@
 
             const submitBtn = contactForm.querySelector('button[type="submit"]');
             submitBtn.disabled = true;
-            submitBtn.textContent = 'Sending...';
+
+            submitBtn.innerHTML = '<span class="spinner"></span>Sending...';
 
             const formData = new FormData(contactForm);
 
@@ -327,13 +517,14 @@
 
                 if (response.ok) {
                     contactForm.style.display = 'none';
+
+                    successMessage.innerHTML = '<div class="checkmark"></div>Message sent successfully.';
                     successMessage.classList.remove('hidden');
                     successMessage.classList.add('show');
 
                     setTimeout(() => {
                         revealContainer.classList.remove('active');
                         mainContent.classList.remove('hidden-content');
-                        contactBtn.classList.remove('hidden-content');
 
                         setTimeout(() => {
                             contactForm.reset();
@@ -341,7 +532,7 @@
                             successMessage.classList.remove('show');
                             successMessage.classList.add('hidden');
                             submitBtn.disabled = false;
-                            submitBtn.textContent = 'Send';
+                            submitBtn.innerHTML = 'Send';
                         }, 500);
 
                         body.removeEventListener('click', closeContactForm);
@@ -351,9 +542,16 @@
                     throw new Error('Form submission failed');
                 }
             } catch (error) {
-                alert('There was an error sending your message. Please try again.');
+                const errorDiv = document.createElement('div');
+                errorDiv.className = 'text-red-400 text-sm mt-2';
+                errorDiv.textContent = 'Oops! Something went wrong. Please try again or email directly.';
+
+                submitBtn.parentNode.appendChild(errorDiv);
+
+                setTimeout(() => errorDiv.remove(), 5000);
+
                 submitBtn.disabled = false;
-                submitBtn.textContent = 'Send';
+                submitBtn.innerHTML = 'Send';
             }
         });
 

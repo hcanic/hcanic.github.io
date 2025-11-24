@@ -204,7 +204,7 @@
             pointer-events: all;
         }
 
-        /* Focus states */
+
         a:focus-visible,
         button:focus-visible,
         input:focus-visible,
@@ -217,6 +217,7 @@
             outline: 2px solid #d4af64;
             outline-offset: 4px;
         }
+
 
         @keyframes checkmark {
             0% {
@@ -256,6 +257,7 @@
             transform: rotate(45deg);
         }
 
+
         input:invalid:not(:placeholder-shown) {
             border-color: #ef4444;
         }
@@ -263,6 +265,7 @@
         input:valid:not(:placeholder-shown) {
             border-color: #10b981;
         }
+
 
         .spinner {
             width: 20px;
@@ -285,6 +288,7 @@
 
 <body
     class="min-h-screen supports-[height:100dvh]:min-h-dvh flex items-center justify-center bg-gradient-to-br from-warm-dark to-warm-dark-light text-white overflow-hidden relative font-body">
+
     <div class="absolute w-full h-full overflow-hidden z-0">
         <div class="circle"></div>
         <div class="circle"></div>
@@ -296,6 +300,7 @@
         class="text-center z-10 max-w-2xl w-full px-8 py-16 bg-white/5 backdrop-blur-lg rounded-3xl shadow-2xl border border-accent-gold/10 container-main transition-opacity duration-500">
         <h1 class="font-display text-5xl md:text-6xl lg:text-7xl font-light mb-10 tracking-wider">H. Čanić</h1>
         <div class="w-full h-0.5 bg-accent-gold mx-auto mb-8"></div>
+
 
         <div class="social-links flex justify-center gap-5 mt-12">
             <a href="https://facebook.com/hcanic"
@@ -386,6 +391,8 @@
         const emailInput = document.getElementById('email');
         const circles = document.querySelectorAll('.circle');
 
+        let isFormSubmitting = false;
+
         let mouseX = 0, mouseY = 0;
         const isTouchDevice = 'ontouchstart' in window || navigator.maxTouchPoints > 0;
 
@@ -404,7 +411,7 @@
         }
 
         document.addEventListener('keydown', (e) => {
-            if (e.key === 'Escape' && revealContainer.classList.contains('active')) {
+            if (e.key === 'Escape' && revealContainer.classList.contains('active') && !isFormSubmitting) {
                 closeContactForm();
             }
         });
@@ -424,7 +431,7 @@
 
             function handleSwipe() {
                 const swipeDistance = touchEndY - touchStartY;
-                if (swipeDistance > 100) {
+                if (swipeDistance > 100 && !isFormSubmitting) {
                     closeContactForm();
                 }
             }
@@ -457,6 +464,7 @@
         function showContactForm(e) {
             e.preventDefault();
 
+            isFormSubmitting = false;
             mainContent.classList.add('hidden-content');
 
             setTimeout(() => {
@@ -474,6 +482,10 @@
         }
 
         function closeContactForm(e) {
+            if (isFormSubmitting) {
+                return;
+            }
+
             if (!e || !revealContainer.contains(e.target)) {
                 if (!revealContainer.classList.contains('active')) {
                     return;
@@ -498,6 +510,8 @@
 
         contactForm.addEventListener('submit', async function (e) {
             e.preventDefault();
+
+            isFormSubmitting = true;
 
             const submitBtn = contactForm.querySelector('button[type="submit"]');
             submitBtn.disabled = true;
@@ -533,6 +547,7 @@
                             successMessage.classList.add('hidden');
                             submitBtn.disabled = false;
                             submitBtn.innerHTML = 'Send';
+                            isFormSubmitting = false;
                         }, 500);
 
                         body.removeEventListener('click', closeContactForm);
@@ -542,6 +557,8 @@
                     throw new Error('Form submission failed');
                 }
             } catch (error) {
+                isFormSubmitting = false;
+
                 const errorDiv = document.createElement('div');
                 errorDiv.className = 'text-red-400 text-sm mt-2';
                 errorDiv.textContent = 'Oops! Something went wrong. Please try again or email directly.';

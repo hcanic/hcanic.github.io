@@ -23,10 +23,13 @@
     <meta property="og:image" content="https://hcanic.github.io/og-image.png" />
     <meta property="og:image:width" content="1200" />
     <meta property="og:image:height" content="630" />
+    <meta property="og:locale" content="en_US" />
+    <meta property="og:site_name" content="H. Čanić" />
     <meta name="twitter:card" content="summary_large_image" />
     <meta name="twitter:title" content="H. Čanić" />
     <meta name="twitter:description" content="Husejin Čanić, Husejin Canic, hcanic." />
     <meta name="twitter:image" content="https://hcanic.github.io/og-image.png" />
+    <link rel="canonical" href="https://hcanic.github.io" />
     <link rel="icon"
         href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><rect width='100' height='100' fill='white'/><text x='50%' y='68%' font-size='60' text-anchor='middle' fill='black' font-family='Playfair Display, serif'>HC</text></svg>"
         type="image/svg+xml">
@@ -37,14 +40,27 @@
     <link
         href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@300;500&family=Inter:wght@300;400;500&display=swap"
         rel="stylesheet">
+    <style>
+        @font-face {
+            font-family: 'Playfair Display Fallback';
+            src: local('Georgia'), local('Times New Roman');
+            font-weight: 300 500;
+        }
+
+        @font-face {
+            font-family: 'Inter Fallback';
+            src: local('Arial'), local('Helvetica');
+            font-weight: 300 500;
+        }
+    </style>
     <script src="https://cdn.tailwindcss.com"></script>
     <script>
         tailwind.config = {
             theme: {
                 extend: {
                     fontFamily: {
-                        display: ['Playfair Display', 'serif'],
-                        body: ['Inter', 'sans-serif'],
+                        display: ['Playfair Display', 'Playfair Display Fallback', 'Georgia', 'serif'],
+                        body: ['Inter', 'Inter Fallback', 'Arial', 'sans-serif'],
                     },
                     colors: {
                         'warm-dark': '#1c1c1a',
@@ -204,7 +220,6 @@
             pointer-events: all;
         }
 
-
         a:focus-visible,
         button:focus-visible,
         input:focus-visible,
@@ -217,7 +232,6 @@
             outline: 2px solid #d4af64;
             outline-offset: 4px;
         }
-
 
         @keyframes checkmark {
             0% {
@@ -257,7 +271,6 @@
             transform: rotate(45deg);
         }
 
-
         input:invalid:not(:placeholder-shown) {
             border-color: #ef4444;
         }
@@ -265,7 +278,6 @@
         input:valid:not(:placeholder-shown) {
             border-color: #10b981;
         }
-
 
         .spinner {
             width: 20px;
@@ -288,8 +300,7 @@
 
 <body
     class="min-h-screen supports-[height:100dvh]:min-h-dvh flex items-center justify-center bg-gradient-to-br from-warm-dark to-warm-dark-light text-white overflow-hidden relative font-body">
-
-    <div class="absolute w-full h-full overflow-hidden z-0">
+    <div class="absolute w-full h-full overflow-hidden z-0" aria-hidden="true">
         <div class="circle"></div>
         <div class="circle"></div>
         <div class="circle"></div>
@@ -299,31 +310,30 @@
     <div id="main-content"
         class="text-center z-10 max-w-2xl w-full px-8 py-16 bg-white/5 backdrop-blur-lg rounded-3xl shadow-2xl border border-accent-gold/10 container-main transition-opacity duration-500">
         <h1 class="font-display text-5xl md:text-6xl lg:text-7xl font-light mb-10 tracking-wider">H. Čanić</h1>
-        <div class="w-full h-0.5 bg-accent-gold mx-auto mb-8"></div>
-
+        <div class="w-full h-0.5 bg-accent-gold mx-auto mb-8" role="separator"></div>
 
         <div class="social-links flex justify-center gap-5 mt-12">
             <a href="https://facebook.com/hcanic"
                 class="w-14 h-14 bg-accent-gold/10 rounded-full flex items-center justify-center text-white border border-accent-gold/20 transition-all duration-300 hover:bg-accent-gold/20 hover:-translate-y-1 hover:scale-110 hover:shadow-xl"
-                target="_blank" rel="noopener" title="Facebook">
-                <svg width="24" height="24" viewBox="0 0 24 24" fill="currentColor">
+                target="_blank" rel="noopener" title="Facebook" aria-label="Visit Facebook profile">
+                <svg width="24" height="24" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
                     <path
                         d="M24 12.073c0-6.627-5.373-12-12-12s-12 5.373-12 12c0 5.99 4.388 10.954 10.125 11.854v-8.385H7.078v-3.47h3.047V9.43c0-3.007 1.792-4.669 4.533-4.669 1.312 0 2.686.235 2.686.235v2.953H15.83c-1.491 0-1.956.925-1.956 1.874v2.25h3.328l-.532 3.47h-2.796v8.385C19.612 23.027 24 18.062 24 12.073z" />
                 </svg>
             </a>
             <a href="https://linkedin.com/in/husejin/"
                 class="w-14 h-14 bg-accent-gold/10 rounded-full flex items-center justify-center text-white border border-accent-gold/20 transition-all duration-300 hover:bg-accent-gold/20 hover:-translate-y-1 hover:scale-110 hover:shadow-xl"
-                target="_blank" rel="noopener" title="LinkedIn">
-                <svg width="24" height="24" viewBox="0 0 24 24" fill="currentColor">
+                target="_blank" rel="noopener" title="LinkedIn" aria-label="Visit LinkedIn profile">
+                <svg width="24" height="24" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
                     <path
                         d="M19 0h-14c-2.761 0-5 2.239-5 5v14c0 2.761 2.239 5 5 5h14c2.762 0 5-2.239 5-5v-14c0-2.761-2.238-5-5-5zm-11 19h-3v-11h3v11zm-1.5-12.268c-.966 0-1.75-.79-1.75-1.764s.784-1.764 1.75-1.764 1.75.79 1.75 1.764-.783 1.764-1.75 1.764zm13.5 12.268h-3v-5.604c0-3.368-4-3.113-4 0v5.604h-3v-11h3v1.765c1.396-2.586 7-2.777 7 2.476v6.759z" />
                 </svg>
             </a>
             <a href="https://hcanic.github.io/cv"
                 class="w-14 h-14 bg-accent-gold/10 rounded-full flex items-center justify-center text-white border border-accent-gold/20 transition-all duration-300 hover:bg-accent-gold/20 hover:-translate-y-1 hover:scale-110 hover:shadow-xl"
-                target="_blank" rel="noopener" title="Portfolio / CV">
+                target="_blank" rel="noopener" title="Portfolio / CV" aria-label="View CV and Portfolio">
                 <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
-                    stroke-linecap="round" stroke-linejoin="round">
+                    stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
                     <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"></path>
                     <polyline points="14 2 14 8 20 8"></polyline>
                     <line x1="16" y1="13" x2="8" y2="13"></line>
@@ -331,35 +341,36 @@
                     <polyline points="10 9 9 9 8 9"></polyline>
                 </svg>
             </a>
-            <a id="contactIconBtn"
+            <button id="contactIconBtn"
                 class="w-14 h-14 bg-accent-gold/10 rounded-full flex items-center justify-center text-white border border-accent-gold/20 transition-all duration-300 hover:bg-accent-gold/20 hover:-translate-y-1 hover:scale-110 hover:shadow-xl cursor-pointer"
-                title="Contact">
+                aria-label="Open contact form" aria-expanded="false">
                 <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
-                    stroke-linecap="round" stroke-linejoin="round">
+                    stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
                     <path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"></path>
                     <polyline points="22,6 12,13 2,6"></polyline>
                 </svg>
-            </a>
+            </button>
         </div>
     </div>
 
-
     <div id="revealContainer"
-        class="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-full max-w-2xl opacity-0 pointer-events-none transition-opacity duration-500 px-8">
+        class="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-full max-w-2xl opacity-0 pointer-events-none transition-opacity duration-500 px-8"
+        role="dialog" aria-modal="true" aria-labelledby="contactFormTitle" aria-hidden="true">
         <div class="bg-white/5 backdrop-blur-lg rounded-3xl shadow-2xl border border-accent-gold/10 p-8 md:p-12">
-            <div class="w-full h-0.5 bg-accent-gold mb-8"></div>
+            <div class="w-full h-0.5 bg-accent-gold mb-8" role="separator"></div>
 
             <form id="contactForm" class="w-full" action="https://formspree.io/f/mdkyoblb" method="POST"
                 style="display: none;">
+                <h2 id="contactFormTitle" class="sr-only">Contact Form</h2>
                 <div class="mb-6 text-left">
                     <label for="email" class="block text-sm text-gray-300 mb-2 tracking-wide">Your email</label>
-                    <input type="email" id="email" name="email" required
+                    <input type="email" id="email" name="email" required autocomplete="email"
                         class="w-full px-0 py-3 font-body text-base text-white bg-transparent border-0 border-b border-accent-gold/60 outline-none transition-colors duration-300 focus:border-white placeholder-gray-500">
                 </div>
 
                 <div class="mb-6 text-left">
                     <label for="subject" class="block text-sm text-gray-300 mb-2 tracking-wide">Subject</label>
-                    <input type="text" id="subject" name="_subject" required
+                    <input type="text" id="subject" name="_subject" required autocomplete="off"
                         class="w-full px-0 py-3 font-body text-base text-white bg-transparent border-0 border-b border-accent-gold/60 outline-none transition-colors duration-300 focus:border-white placeholder-gray-500">
                 </div>
 
@@ -373,78 +384,122 @@
                     class="w-full py-4 mt-2 font-body text-base font-medium tracking-wide text-warm-dark bg-accent-gold border-0 cursor-pointer transition-all duration-300 rounded-lg hover:bg-white disabled:opacity-50 disabled:cursor-not-allowed">Send</button>
             </form>
 
-            <div class="success-message font-display text-2xl text-white tracking-wider hidden" id="successMessage">
+            <div class="success-message font-display text-2xl text-white tracking-wider hidden" id="successMessage"
+                role="status" aria-live="polite">
                 Message sent successfully.
             </div>
 
-            <div class="w-full h-0.5 bg-accent-gold mt-8"></div>
+            <div class="w-full h-0.5 bg-accent-gold mt-8" role="separator"></div>
         </div>
     </div>
 
     <script>
-        const body = document.body;
-        const mainContent = document.getElementById('main-content');
-        const contactIconBtn = document.getElementById('contactIconBtn');
-        const revealContainer = document.getElementById('revealContainer');
-        const contactForm = document.getElementById('contactForm');
-        const successMessage = document.getElementById('successMessage');
-        const emailInput = document.getElementById('email');
-        const circles = document.querySelectorAll('.circle');
+        'use strict';
 
-        let isFormSubmitting = false;
+        const CONFIG = {
+            FORMSPREE_URL: 'https://formspree.io/f/mdkyoblb',
+            SUCCESS_DELAY: 2500,
+            CLOSE_DELAY: 500,
+            PARALLAX_SPEEDS: [5, 10, 15, 20],
+            DEBOUNCE_DELAY: 16
+        };
 
-        let mouseX = 0, mouseY = 0;
+        const elements = {
+            body: document.body,
+            mainContent: document.getElementById('main-content'),
+            contactIconBtn: document.getElementById('contactIconBtn'),
+            revealContainer: document.getElementById('revealContainer'),
+            contactForm: document.getElementById('contactForm'),
+            successMessage: document.getElementById('successMessage'),
+            emailInput: document.getElementById('email'),
+            circles: document.querySelectorAll('.circle')
+        };
+
+        let state = {
+            isFormSubmitting: false,
+            mouseMoveHandler: null,
+            escKeyHandler: null,
+            clickOutsideHandler: null,
+            trapFocusHandler: null,
+            fetchController: null,
+            debounceTimer: null
+        };
+
         const isTouchDevice = 'ontouchstart' in window || navigator.maxTouchPoints > 0;
 
-        if (!isTouchDevice) {
-            document.addEventListener('mousemove', (e) => {
-                mouseX = (e.clientX / window.innerWidth) * 2 - 1;
-                mouseY = (e.clientY / window.innerHeight) * 2 - 1;
-
-                circles.forEach((circle, index) => {
-                    const speed = (index + 1) * 5;
-                    const x = mouseX * speed;
-                    const y = mouseY * speed;
-                    circle.style.transform = `translate(${x}px, ${y}px)`;
-                });
-            });
+        function debounce(func, delay) {
+            return function (...args) {
+                clearTimeout(state.debounceTimer);
+                state.debounceTimer = setTimeout(() => func.apply(this, args), delay);
+            };
         }
 
-        document.addEventListener('keydown', (e) => {
-            if (e.key === 'Escape' && revealContainer.classList.contains('active') && !isFormSubmitting) {
-                closeContactForm();
+        function enableParallax() {
+            if (!isTouchDevice && !state.mouseMoveHandler && elements.circles.length > 0) {
+                let mouseX = 0, mouseY = 0;
+                const updateParallax = () => {
+                    elements.circles.forEach((circle, index) => {
+                        if (circle) {
+                            const speed = CONFIG.PARALLAX_SPEEDS[index] || 5;
+                            const x = mouseX * speed;
+                            const y = mouseY * speed;
+                            circle.style.transform = `translate(${x}px, ${y}px)`;
+                        }
+                    });
+                };
+
+                state.mouseMoveHandler = debounce((e) => {
+                    mouseX = (e.clientX / window.innerWidth) * 2 - 1;
+                    mouseY = (e.clientY / window.innerHeight) * 2 - 1;
+                    requestAnimationFrame(updateParallax);
+                }, CONFIG.DEBOUNCE_DELAY);
+
+                document.addEventListener('mousemove', state.mouseMoveHandler, { passive: true });
             }
-        });
+        }
 
-        let touchStartY = 0;
-        let touchEndY = 0;
+        function disableParallax() {
+            if (state.mouseMoveHandler) {
+                document.removeEventListener('mousemove', state.mouseMoveHandler);
+                state.mouseMoveHandler = null;
+            }
+        }
 
-        if (isTouchDevice) {
-            revealContainer.addEventListener('touchstart', (e) => {
-                touchStartY = e.changedTouches[0].screenY;
-            });
+        function setupEscapeKey() {
+            if (!state.escKeyHandler) {
+                state.escKeyHandler = (e) => {
+                    if (e.key === 'Escape' && elements.revealContainer && elements.revealContainer.classList.contains('active') && !state.isFormSubmitting) {
+                        closeContactForm();
+                    }
+                };
+                document.addEventListener('keydown', state.escKeyHandler);
+            }
+        }
 
-            revealContainer.addEventListener('touchend', (e) => {
-                touchEndY = e.changedTouches[0].screenY;
-                handleSwipe();
-            });
-
-            function handleSwipe() {
-                const swipeDistance = touchEndY - touchStartY;
-                if (swipeDistance > 100 && !isFormSubmitting) {
-                    closeContactForm();
-                }
+        function cleanupEscapeKey() {
+            if (state.escKeyHandler) {
+                document.removeEventListener('keydown', state.escKeyHandler);
+                state.escKeyHandler = null;
             }
         }
 
         function trapFocus(element) {
+            if (!element) return;
+
+            if (state.trapFocusHandler) {
+                element.removeEventListener('keydown', state.trapFocusHandler);
+            }
+
             const focusableElements = element.querySelectorAll(
-                'button, input, textarea, [tabindex]:not([tabindex="-1"])'
+                'button:not([disabled]), input:not([disabled]), textarea:not([disabled]), [tabindex]:not([tabindex="-1"])'
             );
+
+            if (focusableElements.length === 0) return;
+
             const firstFocusable = focusableElements[0];
             const lastFocusable = focusableElements[focusableElements.length - 1];
 
-            element.addEventListener('keydown', function (e) {
+            state.trapFocusHandler = function (e) {
                 if (e.key === 'Tab') {
                     if (e.shiftKey) {
                         if (document.activeElement === firstFocusable) {
@@ -458,121 +513,223 @@
                         }
                     }
                 }
-            });
+            };
+
+            element.addEventListener('keydown', state.trapFocusHandler);
+        }
+
+        function untrapFocus() {
+            if (state.trapFocusHandler && elements.revealContainer) {
+                elements.revealContainer.removeEventListener('keydown', state.trapFocusHandler);
+                state.trapFocusHandler = null;
+            }
         }
 
         function showContactForm(e) {
-            e.preventDefault();
+            if (e) e.preventDefault();
 
-            isFormSubmitting = false;
-            mainContent.classList.add('hidden-content');
+            state.isFormSubmitting = false;
+
+            if (elements.mainContent) elements.mainContent.classList.add('hidden-content');
+
+            if (elements.contactIconBtn) {
+                elements.contactIconBtn.setAttribute('aria-expanded', 'true');
+            }
 
             setTimeout(() => {
-                contactForm.style.display = 'block';
-                revealContainer.classList.add('active');
+                if (elements.contactForm) elements.contactForm.style.display = 'block';
+                if (elements.revealContainer) {
+                    elements.revealContainer.classList.add('active');
+                    elements.revealContainer.setAttribute('aria-hidden', 'false');
+                }
 
-                emailInput.focus();
+                if (elements.emailInput) elements.emailInput.focus();
 
-                trapFocus(revealContainer);
+                trapFocus(elements.revealContainer);
 
-                contactIconBtn.removeEventListener('click', showContactForm);
+                if (elements.contactIconBtn) {
+                    elements.contactIconBtn.removeEventListener('click', showContactForm);
+                }
 
-                body.addEventListener('click', closeContactForm);
+                state.clickOutsideHandler = function (e) {
+                    if (state.isFormSubmitting) return;
+
+                    if (elements.revealContainer && !elements.revealContainer.contains(e.target)) {
+                        closeContactForm();
+                    }
+                };
+
+                elements.body.addEventListener('click', state.clickOutsideHandler);
             }, 50);
         }
 
-        function closeContactForm(e) {
-            if (isFormSubmitting) {
-                return;
+        function closeContactForm() {
+            if (state.isFormSubmitting) return;
+
+            if (!elements.revealContainer || !elements.revealContainer.classList.contains('active')) return;
+
+            if (elements.revealContainer) {
+                elements.revealContainer.classList.remove('active');
+                elements.revealContainer.setAttribute('aria-hidden', 'true');
             }
 
-            if (!e || !revealContainer.contains(e.target)) {
-                if (!revealContainer.classList.contains('active')) {
-                    return;
+            if (elements.mainContent) elements.mainContent.classList.remove('hidden-content');
+
+            if (elements.contactIconBtn) {
+                elements.contactIconBtn.setAttribute('aria-expanded', 'false');
+            }
+
+            if (state.clickOutsideHandler) {
+                elements.body.removeEventListener('click', state.clickOutsideHandler);
+                state.clickOutsideHandler = null;
+            }
+
+            untrapFocus();
+
+            setTimeout(() => {
+                if (elements.contactForm) {
+                    elements.contactForm.style.display = 'none';
+                    elements.contactForm.reset();
                 }
+                if (elements.successMessage) {
+                    elements.successMessage.classList.remove('show');
+                    elements.successMessage.classList.add('hidden');
+                }
+            }, CONFIG.CLOSE_DELAY);
 
-                revealContainer.classList.remove('active');
-
-                mainContent.classList.remove('hidden-content');
-
-                body.removeEventListener('click', closeContactForm);
-
-                setTimeout(() => {
-                    contactForm.style.display = 'none';
-                    contactForm.reset();
-                    successMessage.classList.remove('show');
-                    successMessage.classList.add('hidden');
-                }, 500);
-
-                contactIconBtn.addEventListener('click', showContactForm);
+            if (elements.contactIconBtn) {
+                elements.contactIconBtn.addEventListener('click', showContactForm);
             }
         }
 
-        contactForm.addEventListener('submit', async function (e) {
-            e.preventDefault();
+        if (elements.contactForm) {
+            elements.contactForm.addEventListener('submit', async function (e) {
+                e.preventDefault();
 
-            isFormSubmitting = true;
+                state.isFormSubmitting = true;
 
-            const submitBtn = contactForm.querySelector('button[type="submit"]');
-            submitBtn.disabled = true;
+                const submitBtn = elements.contactForm.querySelector('button[type="submit"]');
+                if (!submitBtn) return;
 
-            submitBtn.innerHTML = '<span class="spinner"></span>Sending...';
+                submitBtn.disabled = true;
+                submitBtn.innerHTML = '<span class="spinner"></span>Sending...';
 
-            const formData = new FormData(contactForm);
+                if (state.fetchController) {
+                    state.fetchController.abort();
+                }
+                state.fetchController = new AbortController();
 
-            try {
-                const response = await fetch(contactForm.action, {
-                    method: 'POST',
-                    body: formData,
-                    headers: {
-                        'Accept': 'application/json'
-                    }
-                });
+                const formData = new FormData(elements.contactForm);
 
-                if (response.ok) {
-                    contactForm.style.display = 'none';
+                try {
+                    const response = await fetch(CONFIG.FORMSPREE_URL, {
+                        method: 'POST',
+                        body: formData,
+                        headers: {
+                            'Accept': 'application/json'
+                        },
+                        signal: state.fetchController.signal
+                    });
 
-                    successMessage.innerHTML = '<div class="checkmark"></div>Message sent successfully.';
-                    successMessage.classList.remove('hidden');
-                    successMessage.classList.add('show');
+                    if (response.ok) {
+                        if (elements.contactForm) elements.contactForm.style.display = 'none';
 
-                    setTimeout(() => {
-                        revealContainer.classList.remove('active');
-                        mainContent.classList.remove('hidden-content');
+                        if (elements.successMessage) {
+                            elements.successMessage.innerHTML = '<div class="checkmark"></div>Message sent successfully.';
+                            elements.successMessage.classList.remove('hidden');
+                            elements.successMessage.classList.add('show');
+                        }
 
                         setTimeout(() => {
-                            contactForm.reset();
-                            contactForm.style.display = 'none';
-                            successMessage.classList.remove('show');
-                            successMessage.classList.add('hidden');
-                            submitBtn.disabled = false;
-                            submitBtn.innerHTML = 'Send';
-                            isFormSubmitting = false;
-                        }, 500);
+                            if (elements.revealContainer) {
+                                elements.revealContainer.classList.remove('active');
+                                elements.revealContainer.setAttribute('aria-hidden', 'true');
+                            }
+                            if (elements.mainContent) elements.mainContent.classList.remove('hidden-content');
+                            if (elements.contactIconBtn) elements.contactIconBtn.setAttribute('aria-expanded', 'false');
 
-                        body.removeEventListener('click', closeContactForm);
-                        contactIconBtn.addEventListener('click', showContactForm);
-                    }, 2500);
-                } else {
-                    throw new Error('Form submission failed');
+                            setTimeout(() => {
+                                if (elements.contactForm) {
+                                    elements.contactForm.reset();
+                                    elements.contactForm.style.display = 'none';
+                                }
+                                if (elements.successMessage) {
+                                    elements.successMessage.classList.remove('show');
+                                    elements.successMessage.classList.add('hidden');
+                                }
+                                if (submitBtn) {
+                                    submitBtn.disabled = false;
+                                    submitBtn.innerHTML = 'Send';
+                                }
+                                state.isFormSubmitting = false;
+                            }, CONFIG.CLOSE_DELAY);
+
+                            if (state.clickOutsideHandler) {
+                                elements.body.removeEventListener('click', state.clickOutsideHandler);
+                                state.clickOutsideHandler = null;
+                            }
+
+                            if (elements.contactIconBtn) {
+                                elements.contactIconBtn.addEventListener('click', showContactForm);
+                            }
+                        }, CONFIG.SUCCESS_DELAY);
+                    } else {
+                        throw new Error('Form submission failed');
+                    }
+                } catch (error) {
+                    state.isFormSubmitting = false;
+
+                    if (error.name !== 'AbortError') {
+                        const existingError = submitBtn.parentNode ? submitBtn.parentNode.querySelector('.error-message') : null;
+                        if (existingError) {
+                            existingError.remove();
+                        }
+
+                        const errorDiv = document.createElement('div');
+                        errorDiv.className = 'text-red-400 text-sm mt-2 error-message';
+                        errorDiv.setAttribute('role', 'alert');
+                        errorDiv.textContent = 'Oops! Something went wrong. Please try again.';
+
+                        if (submitBtn.parentNode) {
+                            submitBtn.parentNode.appendChild(errorDiv);
+
+                            setTimeout(() => {
+                                if (errorDiv.parentNode) {
+                                    errorDiv.remove();
+                                }
+                            }, 5000);
+                        }
+                    }
+
+                    if (submitBtn) {
+                        submitBtn.disabled = false;
+                        submitBtn.innerHTML = 'Send';
+                    }
                 }
-            } catch (error) {
-                isFormSubmitting = false;
+            });
+        }
 
-                const errorDiv = document.createElement('div');
-                errorDiv.className = 'text-red-400 text-sm mt-2';
-                errorDiv.textContent = 'Oops! Something went wrong. Please try again or email directly.';
+        enableParallax();
+        setupEscapeKey();
 
-                submitBtn.parentNode.appendChild(errorDiv);
+        if (elements.contactIconBtn) {
+            elements.contactIconBtn.addEventListener('click', showContactForm);
+        }
 
-                setTimeout(() => errorDiv.remove(), 5000);
-
-                submitBtn.disabled = false;
-                submitBtn.innerHTML = 'Send';
+        window.addEventListener('beforeunload', () => {
+            disableParallax();
+            cleanupEscapeKey();
+            untrapFocus();
+            if (state.clickOutsideHandler) {
+                elements.body.removeEventListener('click', state.clickOutsideHandler);
+            }
+            if (state.fetchController) {
+                state.fetchController.abort();
+            }
+            if (state.debounceTimer) {
+                clearTimeout(state.debounceTimer);
             }
         });
-
-        contactIconBtn.addEventListener('click', showContactForm);
     </script>
 </body>
 

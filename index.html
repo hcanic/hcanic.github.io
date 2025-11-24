@@ -1,5 +1,6 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="hr">
+
 <head>
     <script async src="https://www.googletagmanager.com/gtag/js?id=G-1QVWYTCEP1"></script>
     <script>
@@ -10,128 +11,147 @@
     </script>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>H. Čanić — Coming Soon</title>
+    <title>H. Čanić</title>
     <meta name="description" content="Husejin Čanić, Husejin Canic, hcanic." />
     <meta name="keywords" content="hcanic, husejin čanić, husejin canic, husejin c." />
     <meta name="author" content="H. Čanić" />
     <meta name="robots" content="index, follow" />
-    <meta property="og:title" content="H. Čanić — Coming Soon" />
+    <meta property="og:title" content="H. Čanić" />
     <meta property="og:description" content="Husejin Čanić, Husejin Canic, hcanic." />
     <meta property="og:type" content="website" />
     <meta property="og:url" content="https://hcanic.github.io" />
     <link rel="icon"
-        href="data:image/svg+xml,  <svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'>    <rect width='100' height='100' fill='white'/>    <text x='50%' y='68%' font-size='60' text-anchor='middle' fill='black' font-family='Playfair Display, serif'>HC</text>  </svg>"
+        href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><rect width='100' height='100' fill='white'/><text x='50%' y='68%' font-size='60' text-anchor='middle' fill='black' font-family='Playfair Display, serif'>HC</text></svg>"
         type="image/svg+xml">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link
-        href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@500&family=Inter:wght@300;400&display=swap"
+        href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@300;500&family=Inter:wght@300;400;500&display=swap"
         rel="stylesheet">
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    fontFamily: {
+                        display: ['Playfair Display', 'serif'],
+                        body: ['Inter', 'sans-serif'],
+                    },
+                    colors: {
+                        'warm-dark': '#1c1c1a',
+                        'warm-dark-light': '#2a2825',
+                        'accent-gold': '#d4af64',
+                    }
+                }
+            }
+        }
+    </script>
     <style>
-        :root {
-            --bg: #f5f4f0;
-            --text: #222;
-            --text-soft: #666;
-            --accent: #b8a47e;
-            --font-display: 'Playfair Display', serif;
-            --font-body: 'Inter', sans-serif;
+        @keyframes float {
+
+            0%,
+            100% {
+                transform: translateY(0) translateX(0);
+            }
+
+            25% {
+                transform: translateY(-30px) translateX(30px);
+            }
+
+            50% {
+                transform: translateY(-60px) translateX(-20px);
+            }
+
+            75% {
+                transform: translateY(-30px) translateX(-40px);
+            }
         }
-        *,
-        *::before,
-        *::after {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
+
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+                transform: translateY(20px);
+            }
+
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
         }
-        body {
-            background-color: var(--bg);
-            color: var(--text);
-            font-family: var(--font-body);
-            min-height: 100vh;
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            text-align: center;
-            justify-content: space-between;
-            position: relative;
+
+        @keyframes slideDown {
+            from {
+                opacity: 0;
+                transform: translateY(-30px);
+            }
+
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
         }
-        #main-content {
-            padding: 0 5vw;
-            max-width: 500px;
-            width: 100%;
-            margin-top: auto;
-            margin-bottom: auto;
-            transition: opacity 0.5s;
+
+        @keyframes slideUp {
+            from {
+                opacity: 0;
+                transform: translateY(20px);
+            }
+
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
         }
+
+        .circle {
+            position: absolute;
+            border-radius: 50%;
+            background: rgba(255, 253, 245, 0.03);
+            animation: float 20s infinite;
+        }
+
+        .circle:nth-child(1) {
+            width: 80px;
+            height: 80px;
+            top: 10%;
+            left: 20%;
+            animation-delay: 0s;
+        }
+
+        .circle:nth-child(2) {
+            width: 120px;
+            height: 120px;
+            top: 60%;
+            left: 80%;
+            animation-delay: 2s;
+        }
+
+        .circle:nth-child(3) {
+            width: 100px;
+            height: 100px;
+            top: 80%;
+            left: 10%;
+            animation-delay: 4s;
+        }
+
+        .circle:nth-child(4) {
+            width: 60px;
+            height: 60px;
+            top: 20%;
+            left: 70%;
+            animation-delay: 6s;
+        }
+
+        .container-main {
+            animation: fadeIn 1s ease-out;
+        }
+
         h1 {
-            font-family: var(--font-display);
-            font-size: clamp(2rem, 5vw, 2.8rem);
-            margin-bottom: 1rem;
-            letter-spacing: 0.1em;
-            font-weight: 500;
-        }
-        p {
-            font-size: 1.1rem;
-            color: var(--text-soft);
-            margin-bottom: 0.5rem;
-        }
-        .line {
-            width: 100%;
-            height: 2px;
-            background: var(--accent);
-            margin: 1.5rem auto;
-        }
-        
-        #contactBtn {
-            position: absolute;
-            bottom: 30px;
-            left: 50%;
-            transform: translateX(-50%);
-            
-            font-size: 0.9rem;
-            color: var(--accent);
-            text-decoration: none;
-            cursor: pointer;
-            letter-spacing: 0.05em;
-            font-weight: 500;
-
-            transition: all 0.7s ease-in-out;
-            will-change: transform, color;
+            animation: slideDown 0.8s ease-out;
         }
 
-        #revealContainer {
-            position: absolute;
-            top: 50%;
-            left: 50%;
-            transform: translate(-50%, -50%);
-            width: 100%;
-            max-width: 650px;
-            opacity: 0;
-            pointer-events: none;
-            transition: opacity 0.5s;
-        }
-
-        #revealContainer.active {
-            opacity: 1;
-            pointer-events: all;
-        }
-
-        #revealedEmail {
-            font-family: var(--font-display);
-            font-size: clamp(2rem, 5vw, 2.8rem); 
-            color: var(--text);
-            letter-spacing: 0.1em;
-            display: none;
-        }
-
-        .line-wrapper {
-            padding: 0 5vw;
-        }
-
-        .line-wrapper .line:first-child {
-            margin: 1.5rem auto 0.5rem auto;
-        }
-        .line-wrapper .line:last-child {
-            margin: 0.5rem auto 1.5rem auto;
+        .social-links {
+            animation: slideUp 0.8s ease-out 0.4s backwards;
         }
 
         .hidden-content {
@@ -139,196 +159,163 @@
             pointer-events: none !important;
         }
 
-        footer {
-            width: 100%;
-            padding-bottom: 30px;
-            padding-top: 20px;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-        }
-
-        /* Contact form styles */
-        .contact-form {
-            width: 100%;
-        }
-
-        .form-group {
-            margin-bottom: 1.5rem;
-            text-align: left;
-        }
-
-        label {
-            display: block;
-            font-size: 0.9rem;
-            color: var(--text-soft);
-            margin-bottom: 0.5rem;
-            letter-spacing: 0.05em;
-        }
-
-        input[type="email"],
-        input[type="text"],
-        textarea {
-            width: 100%;
-            padding: 0.75rem;
-            font-family: var(--font-body);
-            font-size: 1rem;
-            color: var(--text);
-            background-color: transparent;
-            border: none;
-            border-bottom: 1px solid var(--accent);
-            outline: none;
-            transition: border-color 0.3s;
-        }
-
-        input[type="email"]:focus,
-        input[type="text"]:focus,
-        textarea:focus {
-            border-bottom-color: var(--text);
-        }
-
-        textarea {
-            resize: vertical;
-            min-height: 120px;
-        }
-
-        .submit-btn {
-            width: 100%;
-            padding: 0.9rem;
-            font-family: var(--font-body);
-            font-size: 0.95rem;
-            font-weight: 500;
-            letter-spacing: 0.05em;
-            color: var(--bg);
-            background-color: var(--accent);
-            border: none;
-            cursor: pointer;
-            transition: all 0.3s;
-            margin-top: 0.5rem;
-        }
-
-        .submit-btn:hover {
-            background-color: var(--text);
-        }
-
-        .submit-btn:disabled {
-            opacity: 0.5;
-            cursor: not-allowed;
-        }
-
-        .success-message {
-            font-family: var(--font-display);
-            font-size: 1.5rem;
-            color: var(--text);
-            letter-spacing: 0.1em;
-            display: none;
-        }
-
-        .success-message.show {
-            display: block;
+        #revealContainer.active {
+            opacity: 1;
+            pointer-events: all;
         }
     </style>
 </head>
-<body>
-    <div id="main-content">
-        <h1 id="main-title">H. Čanić</h1>
-        <div id="main-line" class="line"></div>
-        <p id="main-text">Coming soon.</p>
-    </div>
-    
-    <div id="revealContainer">
-        <div class="line-wrapper">
-            <div id="top-reveal-line" class="line"></div>
-            
-            <form id="contactForm" class="contact-form" action="https://formspree.io/f/mdkyoblb" method="POST" style="display: none;">
-                <div class="form-group">
-                    <label for="email">Your email</label>
-                    <input type="email" id="email" name="email" required>
-                </div>
-                
-                <div class="form-group">
-                    <label for="subject">Subject</label>
-                    <input type="text" id="subject" name="_subject" required>
-                </div>
-                
-                <div class="form-group">
-                    <label for="message">Your message</label>
-                    <textarea id="message" name="message" required></textarea>
-                </div>
-                
-                <button type="submit" class="submit-btn">Send</button>
-            </form>
 
-            <div class="success-message" id="successMessage">
-                Message sent successfully.
-            </div>
-            
-            <div id="bottom-reveal-line" class="line"></div>
+<body
+    class="min-h-screen flex items-center justify-center bg-gradient-to-br from-warm-dark to-warm-dark-light text-white overflow-hidden relative font-body">
+    <div class="absolute w-full h-full overflow-hidden z-0">
+        <div class="circle"></div>
+        <div class="circle"></div>
+        <div class="circle"></div>
+        <div class="circle"></div>
+    </div>
+
+    <div id="main-content"
+        class="text-center z-10 max-w-2xl w-full px-8 py-16 bg-white/5 backdrop-blur-lg rounded-3xl shadow-2xl border border-accent-gold/10 container-main transition-opacity duration-500">
+        <h1 class="font-display text-5xl md:text-6xl lg:text-7xl font-light mb-10 tracking-wider">H. Čanić</h1>
+        <div class="w-full h-0.5 bg-accent-gold mx-auto mb-8"></div>
+
+        <div class="social-links flex justify-center gap-5 mt-12">
+            <a href="https://facebook.com/hcanic"
+                class="w-14 h-14 bg-accent-gold/10 rounded-full flex items-center justify-center text-white border border-accent-gold/20 transition-all duration-300 hover:bg-accent-gold/20 hover:-translate-y-1 hover:scale-110 hover:shadow-xl"
+                target="_blank" rel="noopener" title="Facebook">
+                <svg width="24" height="24" viewBox="0 0 24 24" fill="currentColor">
+                    <path
+                        d="M24 12.073c0-6.627-5.373-12-12-12s-12 5.373-12 12c0 5.99 4.388 10.954 10.125 11.854v-8.385H7.078v-3.47h3.047V9.43c0-3.007 1.792-4.669 4.533-4.669 1.312 0 2.686.235 2.686.235v2.953H15.83c-1.491 0-1.956.925-1.956 1.874v2.25h3.328l-.532 3.47h-2.796v8.385C19.612 23.027 24 18.062 24 12.073z" />
+                </svg>
+            </a>
+            <a href="https://linkedin.com/in/husejin/"
+                class="w-14 h-14 bg-accent-gold/10 rounded-full flex items-center justify-center text-white border border-accent-gold/20 transition-all duration-300 hover:bg-accent-gold/20 hover:-translate-y-1 hover:scale-110 hover:shadow-xl"
+                target="_blank" rel="noopener" title="LinkedIn">
+                <svg width="24" height="24" viewBox="0 0 24 24" fill="currentColor">
+                    <path
+                        d="M19 0h-14c-2.761 0-5 2.239-5 5v14c0 2.761 2.239 5 5 5h14c2.762 0 5-2.239 5-5v-14c0-2.761-2.238-5-5-5zm-11 19h-3v-11h3v11zm-1.5-12.268c-.966 0-1.75-.79-1.75-1.764s.784-1.764 1.75-1.764 1.75.79 1.75 1.764-.783 1.764-1.75 1.764zm13.5 12.268h-3v-5.604c0-3.368-4-3.113-4 0v5.604h-3v-11h3v1.765c1.396-2.586 7-2.777 7 2.476v6.759z" />
+                </svg>
+            </a>
+            <a href="https://hcanic.github.io/cv"
+                class="w-14 h-14 bg-accent-gold/10 rounded-full flex items-center justify-center text-white border border-accent-gold/20 transition-all duration-300 hover:bg-accent-gold/20 hover:-translate-y-1 hover:scale-110 hover:shadow-xl"
+                target="_blank" rel="noopener" title="Portfolio / CV">
+                <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+                    stroke-linecap="round" stroke-linejoin="round">
+                    <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"></path>
+                    <polyline points="14 2 14 8 20 8"></polyline>
+                    <line x1="16" y1="13" x2="8" y2="13"></line>
+                    <line x1="16" y1="17" x2="8" y2="17"></line>
+                    <polyline points="10 9 9 9 8 9"></polyline>
+                </svg>
+            </a>
+            <a id="contactIconBtn"
+                class="w-14 h-14 bg-accent-gold/10 rounded-full flex items-center justify-center text-white border border-accent-gold/20 transition-all duration-300 hover:bg-accent-gold/20 hover:-translate-y-1 hover:scale-110 hover:shadow-xl cursor-pointer"
+                title="Contact">
+                <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+                    stroke-linecap="round" stroke-linejoin="round">
+                    <path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"></path>
+                    <polyline points="22,6 12,13 2,6"></polyline>
+                </svg>
+            </a>
         </div>
     </div>
-    
-    <a id="contactBtn">Contact</a>
 
-    <footer></footer>
+
+    <div id="revealContainer"
+        class="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-full max-w-2xl opacity-0 pointer-events-none transition-opacity duration-500 px-8">
+        <div class="bg-white/5 backdrop-blur-lg rounded-3xl shadow-2xl border border-accent-gold/10 p-8 md:p-12">
+            <div class="w-full h-0.5 bg-accent-gold mb-8"></div>
+
+            <form id="contactForm" class="w-full" action="https://formspree.io/f/mdkyoblb" method="POST"
+                style="display: none;">
+                <div class="mb-6 text-left">
+                    <label for="email" class="block text-sm text-gray-300 mb-2 tracking-wide">Your email</label>
+                    <input type="email" id="email" name="email" required
+                        class="w-full px-0 py-3 font-body text-base text-white bg-transparent border-0 border-b border-accent-gold/60 outline-none transition-colors duration-300 focus:border-white placeholder-gray-500">
+                </div>
+
+                <div class="mb-6 text-left">
+                    <label for="subject" class="block text-sm text-gray-300 mb-2 tracking-wide">Subject</label>
+                    <input type="text" id="subject" name="_subject" required
+                        class="w-full px-0 py-3 font-body text-base text-white bg-transparent border-0 border-b border-accent-gold/60 outline-none transition-colors duration-300 focus:border-white placeholder-gray-500">
+                </div>
+
+                <div class="mb-6 text-left">
+                    <label for="message" class="block text-sm text-gray-300 mb-2 tracking-wide">Your message</label>
+                    <textarea id="message" name="message" required
+                        class="w-full px-0 py-3 font-body text-base text-white bg-transparent border-0 border-b border-accent-gold/60 outline-none transition-colors duration-300 focus:border-white resize-vertical min-h-[120px] placeholder-gray-500"></textarea>
+                </div>
+
+                <button type="submit"
+                    class="w-full py-4 mt-2 font-body text-base font-medium tracking-wide text-warm-dark bg-accent-gold border-0 cursor-pointer transition-all duration-300 rounded-lg hover:bg-white disabled:opacity-50 disabled:cursor-not-allowed">Send</button>
+            </form>
+
+            <div class="success-message font-display text-2xl text-white tracking-wider hidden" id="successMessage">
+                Message sent successfully.
+            </div>
+
+            <div class="w-full h-0.5 bg-accent-gold mt-8"></div>
+        </div>
+    </div>
 
     <script>
         const body = document.body;
         const mainContent = document.getElementById('main-content');
-        const contactBtn = document.getElementById('contactBtn');
+        const contactIconBtn = document.getElementById('contactIconBtn');
         const revealContainer = document.getElementById('revealContainer');
         const contactForm = document.getElementById('contactForm');
         const successMessage = document.getElementById('successMessage');
-        
+
         function showContactForm(e) {
-            e.preventDefault(); 
-            
+            e.preventDefault();
+
             mainContent.classList.add('hidden-content');
-            contactBtn.classList.add('hidden-content');
 
             setTimeout(() => {
                 contactForm.style.display = 'block';
                 revealContainer.classList.add('active');
 
-                contactBtn.removeEventListener('click', showContactForm);
-                
+                contactIconBtn.removeEventListener('click', showContactForm);
+
                 body.addEventListener('click', closeContactForm);
-            }, 50); 
+            }, 50);
         }
 
         function closeContactForm(e) {
             if (revealContainer.contains(e.target)) {
                 return;
             }
-            
+
             if (!revealContainer.classList.contains('active')) {
                 return;
             }
 
             revealContainer.classList.remove('active');
-            
+
             mainContent.classList.remove('hidden-content');
-            contactBtn.classList.remove('hidden-content');
 
             body.removeEventListener('click', closeContactForm);
-            
+
             setTimeout(() => {
                 contactForm.style.display = 'none';
                 contactForm.reset();
                 successMessage.classList.remove('show');
+                successMessage.classList.add('hidden');
             }, 500);
-            
-            contactBtn.addEventListener('click', showContactForm);
+
+            contactIconBtn.addEventListener('click', showContactForm);
         }
 
-        contactForm.addEventListener('submit', async function(e) {
+        contactForm.addEventListener('submit', async function (e) {
             e.preventDefault();
-            
-            const submitBtn = contactForm.querySelector('.submit-btn');
+
+            const submitBtn = contactForm.querySelector('button[type="submit"]');
             submitBtn.disabled = true;
             submitBtn.textContent = 'Sending...';
-            
+
             const formData = new FormData(contactForm);
-            
+
             try {
                 const response = await fetch(contactForm.action, {
                     method: 'POST',
@@ -337,26 +324,28 @@
                         'Accept': 'application/json'
                     }
                 });
-                
+
                 if (response.ok) {
                     contactForm.style.display = 'none';
+                    successMessage.classList.remove('hidden');
                     successMessage.classList.add('show');
-                    
+
                     setTimeout(() => {
                         revealContainer.classList.remove('active');
                         mainContent.classList.remove('hidden-content');
                         contactBtn.classList.remove('hidden-content');
-                        
+
                         setTimeout(() => {
                             contactForm.reset();
                             contactForm.style.display = 'none';
                             successMessage.classList.remove('show');
+                            successMessage.classList.add('hidden');
                             submitBtn.disabled = false;
                             submitBtn.textContent = 'Send';
                         }, 500);
-                        
+
                         body.removeEventListener('click', closeContactForm);
-                        contactBtn.addEventListener('click', showContactForm);
+                        contactIconBtn.addEventListener('click', showContactForm);
                     }, 2500);
                 } else {
                     throw new Error('Form submission failed');
@@ -368,7 +357,8 @@
             }
         });
 
-        contactBtn.addEventListener('click', showContactForm);
+        contactIconBtn.addEventListener('click', showContactForm);
     </script>
 </body>
+
 </html>

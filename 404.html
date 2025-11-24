@@ -1,99 +1,163 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="hr">
 
 <head>
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-1QVWYTCEP1"></script>
+    <script>
+        window.dataLayer = window.dataLayer || [];
+        function gtag() { dataLayer.push(arguments); }
+        gtag('js', new Date());
+        gtag('config', 'G-1QVWYTCEP1');
+    </script>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>404 - Not Found</title>
     <meta name="robots" content="noindex, nofollow" />
     <link rel="icon"
-        href="data:image/svg+xml,  <svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'>    <rect width='100' height='100' fill='white'/>    <text x='50%' y='68%' font-size='60' text-anchor='middle' fill='black' font-family='Playfair Display, serif'>HC</text>  </svg>"
+        href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><rect width='100' height='100' fill='white'/><text x='50%' y='68%' font-size='60' text-anchor='middle' fill='black' font-family='Playfair Display, serif'>HC</text></svg>"
         type="image/svg+xml">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link
-        href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@500&family=Inter:wght@300;400&display=swap"
+        href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@300;500&family=Inter:wght@300;400;500&display=swap"
         rel="stylesheet">
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    fontFamily: {
+                        display: ['Playfair Display', 'serif'],
+                        body: ['Inter', 'sans-serif'],
+                    },
+                    colors: {
+                        'warm-dark': '#1c1c1a',
+                        'warm-dark-light': '#2a2825',
+                        'accent-gold': '#d4af64',
+                    }
+                }
+            }
+        }
+    </script>
     <style>
-        :root {
-            --bg: #f5f4f0;
-            --text: #222;
-            --text-soft: #666;
-            --accent: #b8a47e;
-            --font-display: 'Playfair Display', serif;
-            --font-body: 'Inter', sans-serif;
+        @keyframes float {
+
+            0%,
+            100% {
+                transform: translateY(0) translateX(0);
+            }
+
+            25% {
+                transform: translateY(-30px) translateX(30px);
+            }
+
+            50% {
+                transform: translateY(-60px) translateX(-20px);
+            }
+
+            75% {
+                transform: translateY(-30px) translateX(-40px);
+            }
         }
 
-        *,
-        *::before,
-        *::after {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+                transform: translateY(20px);
+            }
+
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
         }
 
-        body {
-            background-color: var(--bg);
-            color: var(--text);
-            font-family: var(--font-body);
-            min-height: 100vh;
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            text-align: center;
-            justify-content: space-between;
-            position: relative;
+        @keyframes slideDown {
+            from {
+                opacity: 0;
+                transform: translateY(-30px);
+            }
+
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
         }
 
-        #main-content {
-            padding: 0 5vw;
-            max-width: 500px;
-            width: 100%;
-            margin-top: auto;
-            margin-bottom: auto;
+        .circle {
+            position: absolute;
+            border-radius: 50%;
+            background: rgba(255, 253, 245, 0.03);
+            animation: float 20s infinite;
+        }
+
+        .circle:nth-child(1) {
+            width: 80px;
+            height: 80px;
+            top: 10%;
+            left: 20%;
+            animation-delay: 0s;
+        }
+
+        .circle:nth-child(2) {
+            width: 120px;
+            height: 120px;
+            top: 60%;
+            left: 80%;
+            animation-delay: 2s;
+        }
+
+        .circle:nth-child(3) {
+            width: 100px;
+            height: 100px;
+            top: 80%;
+            left: 10%;
+            animation-delay: 4s;
+        }
+
+        .circle:nth-child(4) {
+            width: 60px;
+            height: 60px;
+            top: 20%;
+            left: 70%;
+            animation-delay: 6s;
+        }
+
+        .container-main {
+            animation: fadeIn 1s ease-out;
         }
 
         h1 {
-            font-family: var(--font-display);
-            font-size: clamp(2rem, 5vw, 2.8rem);
-            margin-bottom: 1rem;
-            letter-spacing: 0.1em;
-            font-weight: 500;
-        }
-
-        p {
-            font-size: 1.1rem;
-            color: var(--text-soft);
-            /* Ciljana sivkasta boja */
-            margin-bottom: 0.5rem;
-        }
-
-        .line {
-            width: 100%;
-            height: 2px;
-            background: var(--accent);
-            margin: 1.5rem auto;
-        }
-
-        footer {
-            width: 100%;
-            padding-bottom: 30px;
-            padding-top: 20px;
-            display: flex;
-            justify-content: center;
-            align-items: center;
+            animation: slideDown 0.8s ease-out;
         }
     </style>
 </head>
 
-<body>
-    <div id="main-content">
-        <h1>404</h1>
-        <div class="line"></div>
-        <p>Not yet, go back.</p>
+<body
+    class="min-h-screen flex items-center justify-center bg-gradient-to-br from-warm-dark to-warm-dark-light text-white overflow-hidden relative font-body">
+    <div class="absolute w-full h-full overflow-hidden z-0">
+        <div class="circle"></div>
+        <div class="circle"></div>
+        <div class="circle"></div>
+        <div class="circle"></div>
     </div>
 
-    <footer></footer>
+    <div
+        class="text-center z-10 max-w-2xl w-full px-8 py-16 bg-white/5 backdrop-blur-lg rounded-3xl shadow-2xl border border-accent-gold/10 container-main transition-opacity duration-500">
+        <h1 class="font-display text-8xl md:text-9xl font-light mb-10 tracking-wider">404</h1>
+        <div class="w-full h-0.5 bg-accent-gold mx-auto mb-8"></div>
+        <p class="text-lg md:text-xl text-gray-300 font-light mb-12">Not yet, go back.</p>
+    </div>
 
+    <script>
+        const container = document.querySelector('.container-main');
+
+        document.body.addEventListener('click', function (e) {
+            if (!container.contains(e.target)) {
+                window.location.href = '/';
+            }
+        });
+    </script>
 </body>
 
 </html>

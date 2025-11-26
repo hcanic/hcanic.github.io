@@ -1,0 +1,592 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-1QVWYTCEP1"></script>
+    <script>
+        window.dataLayer = window.dataLayer || [];
+        function gtag() { dataLayer.push(arguments); }
+        gtag('js', new Date());
+        gtag('config', 'G-1QVWYTCEP1');
+    </script>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Portfolio - H. Čanić</title>
+    <meta name="description" content="Portfolio coming soon..." />
+    <link
+        href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@300;500&family=Inter:wght@300;400;500&display=swap"
+        rel="stylesheet">
+    <style>
+        @font-face {
+            font-family: 'Playfair Display Fallback';
+            src: local('Georgia'), local('Times New Roman');
+            font-weight: 300 500;
+        }
+
+        @font-face {
+            font-family: 'Inter Fallback';
+            src: local('Arial'), local('Helvetica');
+            font-weight: 300 500;
+        }
+    </style>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    fontFamily: {
+                        display: ['Playfair Display', 'Playfair Display Fallback', 'Georgia', 'serif'],
+                        body: ['Inter', 'Inter Fallback', 'Arial', 'sans-serif'],
+                    },
+                    colors: {
+                        'warm-dark': '#1c1c1a',
+                        'warm-dark-light': '#2a2825',
+                        'accent-gold': '#d4af64',
+                    }
+                }
+            }
+        }
+    </script>
+    <script type="application/ld+json">
+    {
+        "@context": "https://schema.org",
+        "@type": "Person",
+        "name": "Husejin Čanić",
+        "url": "https://hcanic.github.io",
+        "sameAs": [
+            "https://facebook.com/hcanic",
+            "https://linkedin.com/in/husejin/"
+        ]
+    }
+    </script>
+    <style>
+        html {
+            scroll-behavior: smooth;
+        }
+
+        @media (prefers-reduced-motion: reduce) {
+
+            *,
+            *::before,
+            *::after {
+                animation-duration: 0.01ms !important;
+                animation-iteration-count: 1 !important;
+                transition-duration: 0.01ms !important;
+            }
+
+            html {
+                scroll-behavior: auto;
+            }
+        }
+
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+                transform: translateY(20px);
+            }
+
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        @keyframes slideDown {
+            from {
+                opacity: 0;
+                transform: translateY(-30px);
+            }
+
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        @keyframes slideUp {
+            from {
+                opacity: 0;
+                transform: translateY(20px);
+            }
+
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        @keyframes float {
+
+            0%,
+            100% {
+                transform: translate(0, 0) scale(1);
+            }
+
+            33% {
+                transform: translate(30px, -50px) scale(1.1);
+            }
+
+            66% {
+                transform: translate(-40px, 30px) scale(0.9);
+            }
+        }
+
+        @keyframes float-rhythm {
+
+            0%,
+            100% {
+                transform: translate(0, 0) rotate(0deg);
+            }
+
+            33% {
+                transform: translate(30px, -50px) rotate(10deg);
+            }
+
+            66% {
+                transform: translate(-20px, 20px) rotate(-5deg);
+            }
+        }
+
+        @keyframes pulse-rhythm {
+
+            0%,
+            100% {
+                transform: scale(1);
+                opacity: 0.3;
+            }
+
+            50% {
+                transform: scale(1.2);
+                opacity: 0.5;
+            }
+        }
+
+        @keyframes drift-rhythm {
+            from {
+                transform: rotate(0deg) translateX(50px) rotate(0deg);
+            }
+
+            to {
+                transform: rotate(360deg) translateX(50px) rotate(-360deg);
+            }
+        }
+
+        .animate-float-1 {
+            animation: float-rhythm 13s ease-in-out infinite;
+        }
+
+        .animate-float-2 {
+            animation: float-rhythm 17s ease-in-out infinite reverse;
+        }
+
+        .animate-float-3 {
+            animation: float-rhythm 23s ease-in-out infinite;
+        }
+
+        .animate-pulse-1 {
+            animation: pulse-rhythm 11s ease-in-out infinite;
+        }
+
+        .animate-pulse-2 {
+            animation: pulse-rhythm 19s ease-in-out infinite reverse;
+        }
+
+        .animate-drift-1 {
+            animation: drift-rhythm 29s linear infinite;
+        }
+
+        .animate-drift-2 {
+            animation: drift-rhythm 37s linear infinite reverse;
+        }
+
+        .orb {
+            position: absolute;
+            border-radius: 50%;
+            filter: blur(60px);
+            opacity: 0.3;
+            pointer-events: none;
+        }
+
+        .orb-1 {
+            background: radial-gradient(circle, rgba(212, 175, 100, 0.4), transparent);
+        }
+
+        .orb-2 {
+            background: radial-gradient(circle, rgba(212, 175, 100, 0.3), transparent);
+        }
+
+        .orb-3 {
+            background: radial-gradient(circle, rgba(255, 255, 255, 0.15), transparent);
+        }
+
+        .divider {
+            width: 100%;
+            height: 2px;
+            background: linear-gradient(90deg, transparent, #d4af64, transparent);
+            margin: 2rem 0;
+            animation: expand 1s ease-out 0.3s backwards;
+        }
+
+        @keyframes expand {
+            from {
+                width: 0;
+                opacity: 0;
+            }
+
+            to {
+                width: 100%;
+                opacity: 1;
+            }
+        }
+
+        .particle {
+            position: absolute;
+            width: 2px;
+            height: 2px;
+            background: rgba(212, 175, 100, 0.5);
+            border-radius: 50%;
+            pointer-events: none;
+            animation: rise 8s linear infinite;
+            z-index: 1;
+        }
+
+        @keyframes rise {
+            0% {
+                transform: translateY(0) translateX(0);
+                opacity: 0;
+            }
+
+            10% {
+                opacity: 1;
+            }
+
+            90% {
+                opacity: 1;
+            }
+
+            100% {
+                transform: translateY(-100vh) translateX(50px);
+                opacity: 0;
+            }
+        }
+
+        .container-main {
+            animation: fadeIn 1s ease-out;
+        }
+
+        h1 {
+            animation: slideDown 0.8s ease-out;
+        }
+
+        .loading-container {
+            animation: slideUp 0.8s ease-out 0.4s backwards;
+        }
+
+        .spinner {
+            width: 60px;
+            height: 60px;
+            margin: 0 auto 1.5rem;
+            position: relative;
+        }
+
+        .spinner-ring {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            border: 3px solid transparent;
+            border-top-color: #d4af64;
+            border-radius: 50%;
+            animation: spin 1.5s cubic-bezier(0.68, -0.55, 0.265, 1.55) infinite;
+        }
+
+        .spinner-ring:nth-child(2) {
+            border-top-color: rgba(212, 175, 100, 0.6);
+            animation-delay: -0.5s;
+        }
+
+        .spinner-ring:nth-child(3) {
+            border-top-color: rgba(212, 175, 100, 0.3);
+            animation-delay: -1s;
+        }
+
+        @keyframes spin {
+            0% {
+                transform: rotate(0deg);
+            }
+
+            100% {
+                transform: rotate(360deg);
+            }
+        }
+
+        .spinner-dot {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            width: 10px;
+            height: 10px;
+            background: #d4af64;
+            border-radius: 50%;
+            transform: translate(-50%, -50%);
+            animation: pulse 2s ease-in-out infinite;
+        }
+
+        @keyframes pulse {
+
+            0%,
+            100% {
+                opacity: 1;
+                transform: translate(-50%, -50%) scale(1);
+            }
+
+            50% {
+                opacity: 0.5;
+                transform: translate(-50%, -50%) scale(1.3);
+            }
+        }
+
+        .loading-text {
+            color: rgba(255, 255, 255, 0.9);
+            font-size: 1.25rem;
+            font-weight: 300;
+        }
+
+        .dots span {
+            animation: blink 1.4s infinite;
+        }
+
+        .dots span:nth-child(2) {
+            animation-delay: 0.2s;
+        }
+
+        .dots span:nth-child(3) {
+            animation-delay: 0.4s;
+        }
+
+        @keyframes blink {
+
+            0%,
+            60%,
+            100% {
+                opacity: 0;
+            }
+
+            30% {
+                opacity: 1;
+            }
+        }
+
+        @media (max-width: 768px) {
+            .container-main {
+                padding: 2rem 1.5rem !important;
+                margin: 1rem;
+            }
+
+            h1 {
+                font-size: 2.5rem !important;
+            }
+
+            .spinner {
+                width: 50px !important;
+                height: 50px !important;
+            }
+
+            .loading-text {
+                font-size: 1rem !important;
+            }
+
+            .orb {
+                filter: blur(40px) !important;
+                opacity: 0.2 !important;
+            }
+
+            .orb[style*="width: 400px"] {
+                width: 200px !important;
+                height: 200px !important;
+            }
+
+            .orb[style*="width: 350px"] {
+                width: 180px !important;
+                height: 180px !important;
+            }
+
+            .orb[style*="width: 300px"] {
+                width: 150px !important;
+                height: 150px !important;
+            }
+
+            .orb[style*="width: 280px"] {
+                width: 140px !important;
+                height: 140px !important;
+            }
+
+            .orb[style*="width: 250px"] {
+                width: 130px !important;
+                height: 130px !important;
+            }
+
+            .orb[style*="width: 220px"] {
+                width: 110px !important;
+                height: 110px !important;
+            }
+
+            .orb[style*="width: 200px"] {
+                width: 100px !important;
+                height: 100px !important;
+            }
+
+            .orb[style*="width: 180px"] {
+                width: 90px !important;
+                height: 90px !important;
+            }
+
+            .animate-drift-1,
+            .animate-drift-2 {
+                animation: none !important;
+            }
+        }
+
+        @media (min-width: 769px) and (max-width: 1024px) {
+            .container-main {
+                padding: 2.5rem !important;
+            }
+
+            h1 {
+                font-size: 3rem !important;
+            }
+
+            .orb {
+                opacity: 0.25 !important;
+            }
+        }
+
+        @media (min-width: 1025px) {
+            .orb {
+                will-change: transform, opacity;
+            }
+        }
+    </style>
+</head>
+
+<body
+    class="min-h-screen supports-[height:100dvh]:min-h-dvh flex items-center justify-center bg-gradient-to-br from-warm-dark to-warm-dark-light text-white overflow-hidden relative font-body">
+    <div class="absolute w-full h-full overflow-hidden z-0" aria-hidden="true">
+        <div class="orb orb-1 animate-float-1" style="left: 10%; top: 20%; width: 300px; height: 300px;"></div>
+        <div class="orb orb-2 animate-float-2" style="left: 80%; top: 60%; width: 400px; height: 400px;"></div>
+        <div class="orb orb-3 animate-drift-1" style="left: 40%; top: 40%; width: 250px; height: 250px;"></div>
+
+        <div class="orb orb-1 animate-pulse-1 animate-float-3"
+            style="left: 20%; top: 70%; width: 200px; height: 200px;"></div>
+        <div class="orb orb-2 animate-pulse-2" style="left: 70%; top: 20%; width: 350px; height: 350px;"></div>
+        <div class="orb orb-3 animate-float-1" style="left: 50%; top: 80%; width: 180px; height: 180px;"></div>
+
+        <div class="orb orb-1 animate-drift-2" style="left: 15%; top: 50%; width: 220px; height: 220px;"></div>
+        <div class="orb orb-2 animate-float-2" style="left: 85%; top: 30%; width: 280px; height: 280px;"></div>
+    </div>
+
+    <div
+        class="text-center z-10 max-w-2xl w-full px-8 py-16 bg-white/5 backdrop-blur-lg rounded-3xl shadow-2xl border border-accent-gold/10 container-main transition-opacity duration-500">
+        <h1 class="font-display text-5xl md:text-6xl lg:text-7xl font-light mb-10 tracking-wider">H. Čanić</h1>
+        <div class="divider" role="separator"></div>
+
+        <div class="loading-container mt-12">
+            <div class="spinner">
+                <div class="spinner-ring"></div>
+                <div class="spinner-ring"></div>
+                <div class="spinner-ring"></div>
+                <div class="spinner-dot"></div>
+            </div>
+            <p class="loading-text" id="loadingText"></p>
+        </div>
+    </div>
+
+    <script>
+        'use strict';
+
+        const CONFIG = {
+            DEBOUNCE_DELAY: 16
+        };
+
+        const elements = {
+            body: document.body,
+            orbs: document.querySelectorAll('.orb'),
+            loadingText: document.getElementById('loadingText')
+        };
+
+        let state = {
+            mouseMoveHandler: null,
+            debounceTimer: null
+        };
+
+        const isTouchDevice = 'ontouchstart' in window || navigator.maxTouchPoints > 0;
+
+        function debounce(func, delay) {
+            return function (...args) {
+                clearTimeout(state.debounceTimer);
+                state.debounceTimer = setTimeout(() => func.apply(this, args), delay);
+            };
+        }
+
+        function enableParallax() {
+            if (!isTouchDevice && !state.mouseMoveHandler && elements.orbs.length > 0) {
+                const PARALLAX_SPEEDS = [5, 10, 15, 8, 12, 6, 9, 11];
+                let mouseX = 0, mouseY = 0;
+                const updateParallax = () => {
+                    elements.orbs.forEach((orb, index) => {
+                        if (orb) {
+                            const speed = PARALLAX_SPEEDS[index] || 5;
+                            const x = mouseX * speed;
+                            const y = mouseY * speed;
+                            orb.style.transform = `translate(${x}px, ${y}px)`;
+                        }
+                    });
+                };
+
+                state.mouseMoveHandler = debounce((e) => {
+                    mouseX = (e.clientX / window.innerWidth) * 2 - 1;
+                    mouseY = (e.clientY / window.innerHeight) * 2 - 1;
+                    requestAnimationFrame(updateParallax);
+                }, CONFIG.DEBOUNCE_DELAY);
+
+                document.addEventListener('mousemove', state.mouseMoveHandler, { passive: true });
+            }
+        }
+
+        function createParticle() {
+            const particle = document.createElement('div');
+            particle.className = 'particle';
+            particle.style.left = Math.random() * 100 + '%';
+            particle.style.animationDelay = Math.random() * 8 + 's';
+            particle.style.animationDuration = (8 + Math.random() * 4) + 's';
+            document.body.appendChild(particle);
+
+            setTimeout(() => {
+                particle.remove();
+            }, 12000);
+        }
+
+        setInterval(createParticle, 800);
+
+        for (let i = 0; i < 10; i++) {
+            setTimeout(createParticle, i * 300);
+        }
+
+        if (elements.loadingText) {
+            const text = String.fromCharCode(76, 111, 97, 100, 105, 110, 103);
+            elements.loadingText.innerHTML = text + '<span class="dots"><span>.</span><span>.</span><span>.</span></span>';
+        }
+
+        enableParallax();
+
+        window.addEventListener('beforeunload', () => {
+            if (state.debounceTimer) {
+                clearTimeout(state.debounceTimer);
+            }
+            if (state.mouseMoveHandler) {
+                document.removeEventListener('mousemove', state.mouseMoveHandler);
+            }
+        });
+    </script>
+</body>
+
+</html>

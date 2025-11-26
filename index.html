@@ -31,7 +31,7 @@
     <meta name="twitter:image" content="https://hcanic.github.io/og-image.png" />
     <link rel="canonical" href="https://hcanic.github.io" />
     <link rel="icon"
-        href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><rect width='100' height='100' fill='white'/><text x='50%' y='68%' font-size='60' text-anchor='middle' fill='black' font-family='Playfair Display, serif'>HC</text></svg>"
+        href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><rect width='100' height='100' fill='%231c1c1a'/><text x='50%' y='68%' font-size='60' text-anchor='middle' fill='%23d4af64' font-family='Playfair Display, serif'>HC</text></svg>"
         type="image/svg+xml">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -107,19 +107,15 @@
 
             0%,
             100% {
-                transform: translateY(0) translateX(0);
+                transform: translate(0, 0) scale(1);
             }
 
-            25% {
-                transform: translateY(-30px) translateX(30px);
+            33% {
+                transform: translate(30px, -50px) scale(1.1);
             }
 
-            50% {
-                transform: translateY(-60px) translateX(-20px);
-            }
-
-            75% {
-                transform: translateY(-30px) translateX(-40px);
+            66% {
+                transform: translate(-40px, 30px) scale(0.9);
             }
         }
 
@@ -159,43 +155,42 @@
             }
         }
 
-        .circle {
+        /* CV-style orbs */
+        .orb {
             position: absolute;
             border-radius: 50%;
-            background: rgba(255, 253, 245, 0.03);
-            animation: float 20s infinite;
+            filter: blur(60px);
+            opacity: 0.3;
+            pointer-events: none;
+            animation: float 20s ease-in-out infinite;
         }
 
-        .circle:nth-child(1) {
-            width: 80px;
-            height: 80px;
-            top: 10%;
-            left: 20%;
+        .orb-1 {
+            width: 400px;
+            height: 400px;
+            background: radial-gradient(circle, rgba(212, 175, 100, 0.4), transparent);
+            top: -10%;
+            left: -10%;
             animation-delay: 0s;
         }
 
-        .circle:nth-child(2) {
-            width: 120px;
-            height: 120px;
-            top: 60%;
-            left: 80%;
-            animation-delay: 2s;
+        .orb-2 {
+            width: 500px;
+            height: 500px;
+            background: radial-gradient(circle, rgba(212, 175, 100, 0.3), transparent);
+            bottom: -15%;
+            right: -15%;
+            animation-delay: -7s;
         }
 
-        .circle:nth-child(3) {
-            width: 100px;
-            height: 100px;
-            top: 80%;
-            left: 10%;
-            animation-delay: 4s;
-        }
-
-        .circle:nth-child(4) {
-            width: 60px;
-            height: 60px;
-            top: 20%;
-            left: 70%;
-            animation-delay: 6s;
+        .orb-3 {
+            width: 350px;
+            height: 350px;
+            background: radial-gradient(circle, rgba(255, 255, 255, 0.15), transparent);
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            animation-delay: -14s;
         }
 
         .container-main {
@@ -295,22 +290,246 @@
                 transform: rotate(360deg);
             }
         }
+
+        @keyframes float {
+
+            0%,
+            100% {
+                transform: translate(0, 0) scale(1);
+            }
+
+            33% {
+                transform: translate(30px, -50px) scale(1.1);
+            }
+
+            66% {
+                transform: translate(-40px, 30px) scale(0.9);
+            }
+        }
+
+        @keyframes float-rhythm {
+
+            0%,
+            100% {
+                transform: translate(0, 0) rotate(0deg);
+            }
+
+            33% {
+                transform: translate(30px, -50px) rotate(10deg);
+            }
+
+            66% {
+                transform: translate(-20px, 20px) rotate(-5deg);
+            }
+        }
+
+        @keyframes pulse-rhythm {
+
+            0%,
+            100% {
+                transform: scale(1);
+                opacity: 0.3;
+            }
+
+            50% {
+                transform: scale(1.2);
+                opacity: 0.5;
+            }
+        }
+
+        @keyframes drift-rhythm {
+            from {
+                transform: rotate(0deg) translateX(50px) rotate(0deg);
+            }
+
+            to {
+                transform: rotate(360deg) translateX(50px) rotate(-360deg);
+            }
+        }
+
+        .animate-float-1 {
+            animation: float-rhythm 13s ease-in-out infinite;
+        }
+
+        .animate-float-2 {
+            animation: float-rhythm 17s ease-in-out infinite reverse;
+        }
+
+        .animate-float-3 {
+            animation: float-rhythm 23s ease-in-out infinite;
+        }
+
+        .animate-pulse-1 {
+            animation: pulse-rhythm 11s ease-in-out infinite;
+        }
+
+        .animate-pulse-2 {
+            animation: pulse-rhythm 19s ease-in-out infinite reverse;
+        }
+
+        .animate-drift-1 {
+            animation: drift-rhythm 29s linear infinite;
+        }
+
+        .animate-drift-2 {
+            animation: drift-rhythm 37s linear infinite reverse;
+        }
+
+        .divider {
+            width: 100%;
+            height: 2px;
+            background: linear-gradient(90deg, transparent, #d4af64, transparent);
+            margin: 2rem 0;
+            animation: expand 1s ease-out 0.3s backwards;
+        }
+
+        @keyframes expand {
+            from {
+                width: 0;
+                opacity: 0;
+            }
+
+            to {
+                width: 100%;
+                opacity: 1;
+            }
+        }
+
+        /* Hypnotic floating particles */
+        .particle {
+            position: absolute;
+            width: 2px;
+            height: 2px;
+            background: rgba(212, 175, 100, 0.5);
+            border-radius: 50%;
+            pointer-events: none;
+            animation: rise 8s linear infinite;
+            z-index: 1;
+        }
+
+        @keyframes rise {
+            0% {
+                transform: translateY(0) translateX(0);
+                opacity: 0;
+            }
+
+            10% {
+                opacity: 1;
+            }
+
+            90% {
+                opacity: 1;
+            }
+
+            100% {
+                transform: translateY(-100vh) translateX(50px);
+                opacity: 0;
+            }
+        }
+
+        @media (max-width: 768px) {
+            #main-content {
+                padding: 2rem 1.5rem !important;
+                margin: 1rem;
+            }
+
+            h1 {
+                font-size: 2.5rem !important;
+            }
+
+            .orb {
+                filter: blur(40px) !important;
+                opacity: 0.2 !important;
+            }
+
+            .orb[style*="width: 400px"] {
+                width: 200px !important;
+                height: 200px !important;
+            }
+
+            .orb[style*="width: 350px"] {
+                width: 180px !important;
+                height: 180px !important;
+            }
+
+            .orb[style*="width: 300px"] {
+                width: 150px !important;
+                height: 150px !important;
+            }
+
+            .orb[style*="width: 280px"] {
+                width: 140px !important;
+                height: 140px !important;
+            }
+
+            .orb[style*="width: 250px"] {
+                width: 130px !important;
+                height: 130px !important;
+            }
+
+            .orb[style*="width: 220px"] {
+                width: 110px !important;
+                height: 110px !important;
+            }
+
+            .orb[style*="width: 200px"] {
+                width: 100px !important;
+                height: 100px !important;
+            }
+
+            .orb[style*="width: 180px"] {
+                width: 90px !important;
+                height: 90px !important;
+            }
+
+            .animate-drift-1,
+            .animate-drift-2 {
+                animation: none !important;
+            }
+        }
+
+        @media (min-width: 769px) and (max-width: 1024px) {
+            #main-content {
+                padding: 2.5rem !important;
+            }
+
+            h1 {
+                font-size: 3rem !important;
+            }
+
+            .orb {
+                opacity: 0.25 !important;
+            }
+        }
+
+        @media (min-width: 1025px) {
+            .orb {
+                will-change: transform, opacity;
+            }
+        }
     </style>
 </head>
 
 <body
     class="min-h-screen supports-[height:100dvh]:min-h-dvh flex items-center justify-center bg-gradient-to-br from-warm-dark to-warm-dark-light text-white overflow-hidden relative font-body">
     <div class="absolute w-full h-full overflow-hidden z-0" aria-hidden="true">
-        <div class="circle"></div>
-        <div class="circle"></div>
-        <div class="circle"></div>
-        <div class="circle"></div>
+        <div class="orb orb-1 animate-float-1" style="left: 10%; top: 20%; width: 300px; height: 300px;"></div>
+        <div class="orb orb-2 animate-float-2" style="left: 80%; top: 60%; width: 400px; height: 400px;"></div>
+        <div class="orb orb-3 animate-drift-1" style="left: 40%; top: 40%; width: 250px; height: 250px;"></div>
+
+        <div class="orb orb-1 animate-pulse-1 animate-float-3"
+            style="left: 20%; top: 70%; width: 200px; height: 200px;"></div>
+        <div class="orb orb-2 animate-pulse-2" style="left: 70%; top: 20%; width: 350px; height: 350px;"></div>
+        <div class="orb orb-3 animate-float-1" style="left: 50%; top: 80%; width: 180px; height: 180px;"></div>
+
+        <div class="orb orb-1 animate-drift-2" style="left: 15%; top: 50%; width: 220px; height: 220px;"></div>
+        <div class="orb orb-2 animate-float-2" style="left: 85%; top: 30%; width: 280px; height: 280px;"></div>
     </div>
 
     <div id="main-content"
         class="text-center z-10 max-w-2xl w-full px-8 py-16 bg-white/5 backdrop-blur-lg rounded-3xl shadow-2xl border border-accent-gold/10 container-main transition-opacity duration-500">
         <h1 class="font-display text-5xl md:text-6xl lg:text-7xl font-light mb-10 tracking-wider">H. Čanić</h1>
-        <div class="w-full h-0.5 bg-accent-gold mx-auto mb-8" role="separator"></div>
+        <div class="divider" role="separator"></div>
 
         <div class="social-links flex justify-center gap-5 mt-12">
             <a href="https://facebook.com/hcanic"
@@ -400,7 +619,6 @@
             FORMSPREE_URL: 'https://formspree.io/f/mdkyoblb',
             SUCCESS_DELAY: 2500,
             CLOSE_DELAY: 500,
-            PARALLAX_SPEEDS: [5, 10, 15, 20],
             DEBOUNCE_DELAY: 16
         };
 
@@ -412,7 +630,7 @@
             contactForm: document.getElementById('contactForm'),
             successMessage: document.getElementById('successMessage'),
             emailInput: document.getElementById('email'),
-            circles: document.querySelectorAll('.circle')
+            orbs: document.querySelectorAll('.orb')
         };
 
         let state = {
@@ -435,15 +653,16 @@
         }
 
         function enableParallax() {
-            if (!isTouchDevice && !state.mouseMoveHandler && elements.circles.length > 0) {
+            if (!isTouchDevice && !state.mouseMoveHandler && elements.orbs.length > 0) {
+                const PARALLAX_SPEEDS = [5, 10, 15, 8, 12, 6, 9, 11];
                 let mouseX = 0, mouseY = 0;
                 const updateParallax = () => {
-                    elements.circles.forEach((circle, index) => {
-                        if (circle) {
-                            const speed = CONFIG.PARALLAX_SPEEDS[index] || 5;
+                    elements.orbs.forEach((orb, index) => {
+                        if (orb) {
+                            const speed = PARALLAX_SPEEDS[index] || 5;
                             const x = mouseX * speed;
                             const y = mouseY * speed;
-                            circle.style.transform = `translate(${x}px, ${y}px)`;
+                            orb.style.transform = `translate(${x}px, ${y}px)`;
                         }
                     });
                 };
@@ -730,6 +949,29 @@
                 clearTimeout(state.debounceTimer);
             }
         });
+
+        // Hypnotic floating particles
+        function createParticle() {
+            const particle = document.createElement('div');
+            particle.className = 'particle';
+            particle.style.left = Math.random() * 100 + '%';
+            particle.style.animationDelay = Math.random() * 8 + 's';
+            particle.style.animationDuration = (8 + Math.random() * 4) + 's';
+            document.body.appendChild(particle);
+
+            // Remove particle after animation
+            setTimeout(() => {
+                particle.remove();
+            }, 12000);
+        }
+
+        // Generate particles periodically
+        setInterval(createParticle, 800);
+
+        // Initial particles
+        for (let i = 0; i < 10; i++) {
+            setTimeout(createParticle, i * 300);
+        }
     </script>
 </body>
 

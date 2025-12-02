@@ -12,581 +12,1051 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Portfolio - H. Čanić</title>
-    <meta name="description" content="Portfolio coming soon..." />
-    <link
-        href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@300;500&family=Inter:wght@300;400;500&display=swap"
-        rel="stylesheet">
+    <meta name="description" content="Professional Portfolio" />
+    <link rel="icon"
+        href="data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3e%3crect width='100' height='100' fill='%231c1c1a'/%3e%3ctext x='50%25' y='68%25' font-size='60' text-anchor='middle' fill='%23888' font-family='Inter, sans-serif'%3eHC%3c/text%3e%3c/svg%3e"
+        type="image/svg+xml">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
     <style>
-        @font-face {
-            font-family: 'Playfair Display Fallback';
-            src: local('Georgia'), local('Times New Roman');
-            font-weight: 300 500;
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
         }
 
-        @font-face {
-            font-family: 'Inter Fallback';
-            src: local('Arial'), local('Helvetica');
-            font-weight: 300 500;
-        }
-    </style>
-    <script src="https://cdn.tailwindcss.com"></script>
-    <script>
-        tailwind.config = {
-            theme: {
-                extend: {
-                    fontFamily: {
-                        display: ['Playfair Display', 'Playfair Display Fallback', 'Georgia', 'serif'],
-                        body: ['Inter', 'Inter Fallback', 'Arial', 'sans-serif'],
-                    },
-                    colors: {
-                        'warm-dark': '#1c1c1a',
-                        'warm-dark-light': '#2a2825',
-                        'accent-gold': '#d4af64',
-                    }
-                }
-            }
-        }
-    </script>
-    <script type="application/ld+json">
-    {
-        "@context": "https://schema.org",
-        "@type": "Person",
-        "name": "Husejin Čanić",
-        "url": "https://hcanic.github.io",
-        "sameAs": [
-            "https://facebook.com/hcanic",
-            "https://linkedin.com/in/husejin/"
-        ]
-    }
-    </script>
-    <style>
-        html {
-            scroll-behavior: smooth;
+        :root {
+            --bg-dark: #0a0a0a;
+            --bg-medium: #1a1a1a;
+            --bg-elevated: #151515;
+            --text-primary: #e0e0e0;
+            --text-secondary: #999;
+            --accent: #666;
+            --accent-hover: #888;
+            --border: #333;
         }
 
-        @media (prefers-reduced-motion: reduce) {
+        body {
+            font-family: 'Inter', sans-serif;
+            background: linear-gradient(135deg, #0a0a0a 0%, #1a1a1a 50%, #0f0f0f 100%);
+            color: var(--text-primary);
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
 
-            *,
-            *::before,
-            *::after {
-                animation-duration: 0.01ms !important;
-                animation-iteration-count: 1 !important;
-                transition-duration: 0.01ms !important;
-            }
+        body.content-locked .main-content {
+            filter: blur(8px);
+            pointer-events: none;
+        }
 
-            html {
-                scroll-behavior: auto;
-            }
+        #paywallModal {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(10, 10, 10, 0.98);
+            backdrop-filter: blur(20px);
+            z-index: 9999;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 20px;
+        }
+
+        #paywallModal.hidden {
+            display: none;
+        }
+
+        .paywall-content {
+            background: var(--bg-elevated);
+            border: 1px solid var(--border);
+            border-radius: 8px;
+            padding: 40px;
+            max-width: 600px;
+            width: 100%;
+            position: relative;
+        }
+
+        .paywall-content h2 {
+            font-size: 1.5rem;
+            color: var(--text-primary);
+            margin-bottom: 10px;
+            font-weight: 600;
+        }
+
+        .paywall-content h3 {
+            font-size: 0.9rem;
+            color: var(--text-secondary);
+            margin-bottom: 20px;
+            font-weight: 400;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+
+        .language-selector {
+            position: absolute;
+            top: 20px;
+            right: 25px;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .lang-flag {
+            font-size: 1.4rem;
+            cursor: pointer;
+            opacity: 0.4;
+            transition: all 0.2s;
+            user-select: none;
+            padding: 4px 8px;
+            border-radius: 6px;
+        }
+
+        .lang-flag:hover {
+            opacity: 0.7;
+            transform: scale(1.05);
+        }
+
+        .lang-flag.active {
+            opacity: 1;
+            background: rgba(102, 102, 102, 0.15);
+        }
+
+        .lang-separator {
+            color: var(--border);
+            font-size: 0.9rem;
+            user-select: none;
+        }
+
+        .terms-content {
+            margin-bottom: 25px;
+        }
+
+        .terms-content p {
+            color: var(--text-secondary);
+            margin-bottom: 12px;
+            line-height: 1.6;
+            font-size: 0.9rem;
+        }
+
+        .terms-content ul {
+            margin-left: 20px;
+            margin-bottom: 15px;
+        }
+
+        .terms-content li {
+            margin-bottom: 8px;
+            color: var(--text-secondary);
+            line-height: 1.5;
+            font-size: 0.85rem;
+        }
+
+        .terms-divider {
+            width: 100%;
+            height: 1px;
+            background: var(--border);
+            margin: 20px 0 25px 0;
+        }
+
+        .paywall-buttons {
+            display: flex;
+            gap: 12px;
+            margin-top: 25px;
+        }
+
+        .paywall-buttons button {
+            flex: 1;
+            padding: 12px 24px;
+            font-size: 0.9rem;
+            font-weight: 500;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+            transition: all 0.2s;
+            font-family: 'Inter', sans-serif;
+        }
+
+        .btn-accept {
+            background: var(--accent);
+            color: var(--text-primary);
+        }
+
+        .btn-accept:hover {
+            background: var(--accent-hover);
+        }
+
+        .btn-decline {
+            background: transparent;
+            color: var(--text-secondary);
+            border: 1px solid var(--border);
+        }
+
+        .btn-decline:hover {
+            background: rgba(255, 255, 255, 0.05);
+            border-color: var(--accent);
+        }
+
+        .password-section {
+            margin-top: 25px;
+        }
+
+        .password-section label {
+            display: block;
+            color: var(--text-secondary);
+            margin-bottom: 10px;
+            font-size: 0.9rem;
+        }
+
+        .password-section input {
+            width: 100%;
+            padding: 12px;
+            background: var(--bg-dark);
+            border: 1px solid var(--border);
+            border-radius: 4px;
+            color: var(--text-primary);
+            font-size: 0.95rem;
+            font-family: 'Inter', sans-serif;
+        }
+
+        .password-section input:focus {
+            outline: none;
+            border-color: var(--accent);
+        }
+
+        .error-message {
+            color: #ef4444;
+            font-size: 0.85rem;
+            margin-top: 8px;
+            display: none;
+        }
+
+        .btn-submit {
+            width: 100%;
+            margin-top: 15px;
+            padding: 12px 24px;
+            background: var(--accent);
+            color: var(--text-primary);
+            border: none;
+            border-radius: 4px;
+            font-size: 0.9rem;
+            font-weight: 500;
+            cursor: pointer;
+            transition: all 0.2s;
+            font-family: 'Inter', sans-serif;
+        }
+
+        .btn-submit:hover {
+            background: var(--accent-hover);
+        }
+
+        .btn-submit:disabled {
+            opacity: 0.5;
+            cursor: not-allowed;
+        }
+
+        .divider {
+            width: 100%;
+            height: 1px;
+            background: var(--border);
+            margin: 25px 0;
+        }
+
+        .radio-group {
+            margin-top: 20px;
+        }
+
+        .radio-group p {
+            color: var(--text-secondary);
+            margin-bottom: 12px;
+            font-size: 0.9rem;
+        }
+
+        .radio-option {
+            display: flex;
+            align-items: center;
+            margin-bottom: 10px;
+            cursor: pointer;
+        }
+
+        .radio-option input[type="radio"] {
+            appearance: none;
+            width: 18px;
+            height: 18px;
+            border: 2px solid var(--accent);
+            border-radius: 50%;
+            margin-right: 10px;
+            cursor: pointer;
+            position: relative;
+            transition: all 0.2s;
+        }
+
+        .radio-option input[type="radio"]:checked {
+            border-color: var(--text-primary);
+        }
+
+        .radio-option input[type="radio"]:checked::after {
+            content: '';
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            width: 8px;
+            height: 8px;
+            background: var(--text-primary);
+            border-radius: 50%;
+        }
+
+        .radio-option label {
+            color: var(--text-secondary);
+            font-size: 0.9rem;
+            cursor: pointer;
+        }
+
+        .access-form {
+            margin-top: 20px;
+            display: none;
+        }
+
+        .access-form.show {
+            display: block;
+        }
+
+        .form-group {
+            margin-bottom: 15px;
+        }
+
+        .form-group label {
+            display: block;
+            color: var(--text-secondary);
+            margin-bottom: 6px;
+            font-size: 0.85rem;
+        }
+
+        .form-group input,
+        .form-group textarea {
+            width: 100%;
+            padding: 10px;
+            background: var(--bg-dark);
+            border: 1px solid var(--border);
+            border-radius: 4px;
+            color: var(--text-primary);
+            font-size: 0.9rem;
+            font-family: 'Inter', sans-serif;
+        }
+
+        .form-group input:focus,
+        .form-group textarea:focus {
+            outline: none;
+            border-color: var(--accent);
+        }
+
+        .form-group textarea {
+            min-height: 80px;
+            resize: vertical;
+        }
+
+        .submit-btn {
+            width: 100%;
+            padding: 12px 24px;
+            background: var(--accent);
+            color: var(--text-primary);
+            border: none;
+            border-radius: 4px;
+            font-size: 0.9rem;
+            font-weight: 500;
+            cursor: pointer;
+            transition: all 0.2s;
+            font-family: 'Inter', sans-serif;
+        }
+
+        .submit-btn:hover {
+            background: var(--accent-hover);
+        }
+
+        .submit-btn:disabled {
+            opacity: 0.5;
+            cursor: not-allowed;
+        }
+
+        .success-message {
+            color: #10b981;
+            text-align: center;
+            margin-top: 12px;
+            font-size: 0.9rem;
+            display: none;
+        }
+
+        .success-message.show {
+            display: block;
+        }
+
+        .main-content {
+            text-align: center;
+            max-width: 800px;
+            width: 100%;
+            padding: 60px 40px;
+        }
+
+        .main-content h1 {
+            font-size: 2.5rem;
+            font-weight: 300;
+            margin-bottom: 40px;
+            color: var(--text-primary);
+        }
+
+        .content-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 30px;
+            margin-top: 40px;
+        }
+
+        .content-card {
+            background: var(--bg-elevated);
+            border: 1px solid var(--border);
+            border-radius: 8px;
+            padding: 30px;
+            text-align: left;
+        }
+
+        .content-card h3 {
+            font-size: 1.1rem;
+            color: var(--text-primary);
+            margin-bottom: 15px;
+            font-weight: 500;
+        }
+
+        .content-card p {
+            color: var(--text-secondary);
+            font-size: 0.9rem;
+            line-height: 1.6;
+        }
+
+        /* Tab Styles */
+        .nav-tabs {
+            display: flex;
+            justify-content: center;
+            gap: 10px;
+            margin-bottom: 40px;
+            flex-wrap: wrap;
+        }
+
+        .nav-tabs button {
+            background: transparent;
+            border: none;
+            color: var(--text-secondary);
+            padding: 10px 20px;
+            cursor: pointer;
+            font-size: 1rem;
+            transition: all 0.3s;
+            border-bottom: 2px solid transparent;
+            font-family: 'Inter', sans-serif;
+        }
+
+        .nav-tabs button:hover {
+            color: var(--text-primary);
+        }
+
+        .nav-tabs button.active {
+            color: var(--text-primary);
+            border-bottom-color: var(--accent);
+        }
+
+        .tab-content {
+            display: none;
+            animation: fadeIn 0.5s ease;
+            text-align: left;
+        }
+
+        .tab-content.active {
+            display: block;
+        }
+
+        .tab-content section {
+            margin-bottom: 40px;
+        }
+
+        .tab-content h2 {
+            font-size: 1.8rem;
+            margin-bottom: 20px;
+            color: var(--text-primary);
+            font-weight: 300;
+        }
+
+        .tab-content h3 {
+            font-size: 1.4rem;
+            margin: 30px 0 15px;
+            color: var(--text-primary);
+            font-weight: 400;
+        }
+
+        .tab-content h4 {
+            font-size: 1.1rem;
+            margin: 20px 0 10px;
+            color: var(--text-primary);
+            font-weight: 500;
+        }
+
+        .tab-content p {
+            color: var(--text-secondary);
+            line-height: 1.7;
+            margin-bottom: 15px;
+        }
+
+        .tab-content ul {
+            margin-left: 20px;
+            margin-bottom: 20px;
+            color: var(--text-secondary);
+        }
+
+        .tab-content li {
+            margin-bottom: 8px;
+            line-height: 1.6;
+        }
+
+        .skills-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 20px;
+            margin-top: 20px;
+        }
+
+        .skill-category {
+            background: var(--bg-elevated);
+            padding: 20px;
+            border-radius: 8px;
+            border: 1px solid var(--border);
+        }
+
+        .skill-category h4 {
+            margin-top: 0;
+            margin-bottom: 15px;
+            font-size: 1rem;
+            color: var(--accent-hover);
+        }
+
+        .skill-category ul {
+            margin: 0;
+            padding-left: 15px;
+        }
+
+        .gallery {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 20px;
+            margin-top: 30px;
+        }
+
+        .gallery-item {
+            background: var(--bg-elevated);
+            padding: 20px;
+            border-radius: 8px;
+            border: 1px solid var(--border);
+            text-align: center;
+            transition: transform 0.2s;
+        }
+
+        .gallery-item:hover {
+            transform: translateY(-5px);
+            border-color: var(--accent);
+        }
+
+        .gallery-item h4 {
+            margin: 10px 0 5px;
+            font-size: 1rem;
+        }
+
+        .gallery-item p {
+            font-size: 0.85rem;
+            margin: 0;
+        }
+
+        .project-overview {
+            background: var(--bg-medium);
+            padding: 25px;
+            border-radius: 8px;
+            margin-bottom: 30px;
+            border-left: 3px solid var(--accent);
+        }
+
+        .challenge {
+            background: rgba(255, 255, 255, 0.03);
+            padding: 20px;
+            border-radius: 8px;
+            margin-top: 20px;
         }
 
         @keyframes fadeIn {
             from {
                 opacity: 0;
-                transform: translateY(20px);
+                transform: translateY(10px);
             }
 
             to {
                 opacity: 1;
                 transform: translateY(0);
             }
-        }
-
-        @keyframes slideDown {
-            from {
-                opacity: 0;
-                transform: translateY(-30px);
-            }
-
-            to {
-                opacity: 1;
-                transform: translateY(0);
-            }
-        }
-
-        @keyframes slideUp {
-            from {
-                opacity: 0;
-                transform: translateY(20px);
-            }
-
-            to {
-                opacity: 1;
-                transform: translateY(0);
-            }
-        }
-
-        @keyframes float {
-
-            0%,
-            100% {
-                transform: translate(0, 0) scale(1);
-            }
-
-            33% {
-                transform: translate(30px, -50px) scale(1.1);
-            }
-
-            66% {
-                transform: translate(-40px, 30px) scale(0.9);
-            }
-        }
-
-        @keyframes float-rhythm {
-
-            0%,
-            100% {
-                transform: translate(0, 0) rotate(0deg);
-            }
-
-            33% {
-                transform: translate(30px, -50px) rotate(10deg);
-            }
-
-            66% {
-                transform: translate(-20px, 20px) rotate(-5deg);
-            }
-        }
-
-        @keyframes pulse-rhythm {
-
-            0%,
-            100% {
-                transform: scale(1);
-                opacity: 0.3;
-            }
-
-            50% {
-                transform: scale(1.2);
-                opacity: 0.5;
-            }
-        }
-
-        @keyframes drift-rhythm {
-            from {
-                transform: rotate(0deg) translateX(50px) rotate(0deg);
-            }
-
-            to {
-                transform: rotate(360deg) translateX(50px) rotate(-360deg);
-            }
-        }
-
-        .animate-float-1 {
-            animation: float-rhythm 13s ease-in-out infinite;
-        }
-
-        .animate-float-2 {
-            animation: float-rhythm 17s ease-in-out infinite reverse;
-        }
-
-        .animate-float-3 {
-            animation: float-rhythm 23s ease-in-out infinite;
-        }
-
-        .animate-pulse-1 {
-            animation: pulse-rhythm 11s ease-in-out infinite;
-        }
-
-        .animate-pulse-2 {
-            animation: pulse-rhythm 19s ease-in-out infinite reverse;
-        }
-
-        .animate-drift-1 {
-            animation: drift-rhythm 29s linear infinite;
-        }
-
-        .animate-drift-2 {
-            animation: drift-rhythm 37s linear infinite reverse;
-        }
-
-        .orb {
-            position: absolute;
-            border-radius: 50%;
-            filter: blur(60px);
-            opacity: 0.3;
-            pointer-events: none;
-        }
-
-        .orb-1 {
-            background: radial-gradient(circle, rgba(212, 175, 100, 0.4), transparent);
-        }
-
-        .orb-2 {
-            background: radial-gradient(circle, rgba(212, 175, 100, 0.3), transparent);
-        }
-
-        .orb-3 {
-            background: radial-gradient(circle, rgba(255, 255, 255, 0.15), transparent);
-        }
-
-        .divider {
-            width: 100%;
-            height: 2px;
-            background: linear-gradient(90deg, transparent, #d4af64, transparent);
-            margin: 2rem 0;
-            animation: expand 1s ease-out 0.3s backwards;
-        }
-
-        @keyframes expand {
-            from {
-                width: 0;
-                opacity: 0;
-            }
-
-            to {
-                width: 100%;
-                opacity: 1;
-            }
-        }
-
-        .particle {
-            position: absolute;
-            width: 2px;
-            height: 2px;
-            background: rgba(212, 175, 100, 0.5);
-            border-radius: 50%;
-            pointer-events: none;
-            animation: rise 8s linear infinite;
-            z-index: 1;
-        }
-
-        @keyframes rise {
-            0% {
-                transform: translateY(0) translateX(0);
-                opacity: 0;
-            }
-
-            10% {
-                opacity: 1;
-            }
-
-            90% {
-                opacity: 1;
-            }
-
-            100% {
-                transform: translateY(-100vh) translateX(50px);
-                opacity: 0;
-            }
-        }
-
-        .container-main {
-            animation: fadeIn 1s ease-out;
-        }
-
-        h1 {
-            animation: slideDown 0.8s ease-out;
-        }
-
-        .loading-container {
-            animation: slideUp 0.8s ease-out 0.4s backwards;
-        }
-
-        .spinner {
-            width: 60px;
-            height: 60px;
-            margin: 0 auto 1.5rem;
-            position: relative;
-        }
-
-        .spinner-ring {
-            position: absolute;
-            width: 100%;
-            height: 100%;
-            border: 3px solid transparent;
-            border-top-color: #d4af64;
-            border-radius: 50%;
-            animation: spin 1.5s cubic-bezier(0.68, -0.55, 0.265, 1.55) infinite;
-        }
-
-        .spinner-ring:nth-child(2) {
-            border-top-color: rgba(212, 175, 100, 0.6);
-            animation-delay: -0.5s;
-        }
-
-        .spinner-ring:nth-child(3) {
-            border-top-color: rgba(212, 175, 100, 0.3);
-            animation-delay: -1s;
         }
 
         @keyframes spin {
-            0% {
-                transform: rotate(0deg);
-            }
-
-            100% {
+            to {
                 transform: rotate(360deg);
             }
         }
 
-        .spinner-dot {
-            position: absolute;
-            top: 50%;
-            left: 50%;
-            width: 10px;
-            height: 10px;
-            background: #d4af64;
-            border-radius: 50%;
-            transform: translate(-50%, -50%);
-            animation: pulse 2s ease-in-out infinite;
-        }
-
-        @keyframes pulse {
-
-            0%,
-            100% {
-                opacity: 1;
-                transform: translate(-50%, -50%) scale(1);
-            }
-
-            50% {
-                opacity: 0.5;
-                transform: translate(-50%, -50%) scale(1.3);
-            }
-        }
-
-        .loading-text {
-            color: rgba(255, 255, 255, 0.9);
-            font-size: 1.25rem;
-            font-weight: 300;
-        }
-
-        .dots span {
-            animation: blink 1.4s infinite;
-        }
-
-        .dots span:nth-child(2) {
-            animation-delay: 0.2s;
-        }
-
-        .dots span:nth-child(3) {
-            animation-delay: 0.4s;
-        }
-
-        @keyframes blink {
-
-            0%,
-            60%,
-            100% {
-                opacity: 0;
-            }
-
-            30% {
-                opacity: 1;
-            }
-        }
-
         @media (max-width: 768px) {
-            .container-main {
-                padding: 2rem 1.5rem !important;
-                margin: 1rem;
+            .paywall-content {
+                padding: 30px 20px;
             }
 
-            h1 {
-                font-size: 2.5rem !important;
+            .paywall-buttons {
+                flex-direction: column;
             }
 
-            .spinner {
-                width: 50px !important;
-                height: 50px !important;
+            .language-selector {
+                top: 15px;
+                right: 15px;
+                gap: 6px;
             }
 
-            .loading-text {
-                font-size: 1rem !important;
+            .lang-flag {
+                font-size: 1.2rem;
             }
 
-            .orb {
-                filter: blur(40px) !important;
-                opacity: 0.2 !important;
+            .main-content {
+                padding: 40px 20px;
             }
 
-            .orb[style*="width: 400px"] {
-                width: 200px !important;
-                height: 200px !important;
+            .content-grid {
+                grid-template-columns: 1fr;
             }
 
-            .orb[style*="width: 350px"] {
-                width: 180px !important;
-                height: 180px !important;
+            .nav-tabs {
+                flex-direction: column;
+                align-items: stretch;
             }
 
-            .orb[style*="width: 300px"] {
-                width: 150px !important;
-                height: 150px !important;
-            }
-
-            .orb[style*="width: 280px"] {
-                width: 140px !important;
-                height: 140px !important;
-            }
-
-            .orb[style*="width: 250px"] {
-                width: 130px !important;
-                height: 130px !important;
-            }
-
-            .orb[style*="width: 220px"] {
-                width: 110px !important;
-                height: 110px !important;
-            }
-
-            .orb[style*="width: 200px"] {
-                width: 100px !important;
-                height: 100px !important;
-            }
-
-            .orb[style*="width: 180px"] {
-                width: 90px !important;
-                height: 90px !important;
-            }
-
-            .animate-drift-1,
-            .animate-drift-2 {
-                animation: none !important;
-            }
-        }
-
-        @media (min-width: 769px) and (max-width: 1024px) {
-            .container-main {
-                padding: 2.5rem !important;
-            }
-
-            h1 {
-                font-size: 3rem !important;
-            }
-
-            .orb {
-                opacity: 0.25 !important;
-            }
-        }
-
-        @media (min-width: 1025px) {
-            .orb {
-                will-change: transform, opacity;
+            .nav-tabs button {
+                text-align: left;
+                border-bottom: 1px solid var(--border);
             }
         }
     </style>
 </head>
 
-<body
-    class="min-h-screen supports-[height:100dvh]:min-h-dvh flex items-center justify-center bg-gradient-to-br from-warm-dark to-warm-dark-light text-white overflow-hidden relative font-body">
-    <div class="absolute w-full h-full overflow-hidden z-0" aria-hidden="true">
-        <div class="orb orb-1 animate-float-1" style="left: 10%; top: 20%; width: 300px; height: 300px;"></div>
-        <div class="orb orb-2 animate-float-2" style="left: 80%; top: 60%; width: 400px; height: 400px;"></div>
-        <div class="orb orb-3 animate-drift-1" style="left: 40%; top: 40%; width: 250px; height: 250px;"></div>
-
-        <div class="orb orb-1 animate-pulse-1 animate-float-3"
-            style="left: 20%; top: 70%; width: 200px; height: 200px;"></div>
-        <div class="orb orb-2 animate-pulse-2" style="left: 70%; top: 20%; width: 350px; height: 350px;"></div>
-        <div class="orb orb-3 animate-float-1" style="left: 50%; top: 80%; width: 180px; height: 180px;"></div>
-
-        <div class="orb orb-1 animate-drift-2" style="left: 15%; top: 50%; width: 220px; height: 220px;"></div>
-        <div class="orb orb-2 animate-float-2" style="left: 85%; top: 30%; width: 280px; height: 280px;"></div>
-    </div>
-
-    <div
-        class="text-center z-10 max-w-2xl w-full px-8 py-16 bg-white/5 backdrop-blur-lg rounded-3xl shadow-2xl border border-accent-gold/10 container-main transition-opacity duration-500">
-        <h1 class="font-display text-5xl md:text-6xl lg:text-7xl font-light mb-10 tracking-wider">H. Čanić</h1>
-        <div class="divider" role="separator"></div>
-
-        <div class="loading-container mt-12">
-            <div class="spinner">
-                <div class="spinner-ring"></div>
-                <div class="spinner-ring"></div>
-                <div class="spinner-ring"></div>
-                <div class="spinner-dot"></div>
+<body class="content-locked">
+    <div id="paywallModal">
+        <div class="paywall-content">
+            <div class="language-selector">
+                <span class="lang-flag active" data-lang="en" onclick="changeLanguage('en')">🇬🇧</span>
+                <span class="lang-separator">|</span>
+                <span class="lang-flag" data-lang="de" onclick="changeLanguage('de')">🇩🇪</span>
+                <span class="lang-separator">|</span>
+                <span class="lang-flag" data-lang="se" onclick="changeLanguage('se')">🇸🇪</span>
             </div>
-            <p class="loading-text" id="loadingText"></p>
+            <div id="termsStep">
+                <h2 id="termsTitle">Confidential Portfolio</h2>
+                <h3 id="termsSubtitle">FOR EVALUATION ONLY</h3>
+                <div class="terms-content">
+                    <p id="termsIntro"></p>
+                    <ul id="termsList"></ul>
+                </div>
+                <div class="terms-divider"></div>
+                <div class="paywall-buttons">
+                    <button class="btn-accept" id="acceptBtn" onclick="acceptTerms()"></button>
+                    <button class="btn-decline" id="declineBtn" onclick="declineAccess()"></button>
+                </div>
+            </div>
+            <div id="codeStep" style="display: none;">
+                <h2 id="codeTitle"></h2>
+                <p id="codeSubtitle" style="color: var(--text-secondary); margin-bottom: 20px; font-size: 0.9rem;"></p>
+                <div class="password-section">
+                    <label for="accessCode" id="codeLabel"></label>
+                    <input type="text" id="accessCode" placeholder=""
+                        onkeypress="if(event.key === 'Enter') checkAccessCode()" />
+                    <div id="errorMessage" class="error-message"></div>
+                    <button class="btn-submit" id="submitBtn" onclick="checkAccessCode()"></button>
+                </div>
+                <div class="divider"></div>
+                <div class="radio-group">
+                    <p id="noCodeQuestion"></p>
+                    <div class="radio-option">
+                        <input type="radio" id="requestAccess" name="accessAction" value="request"
+                            onchange="handleRadioChange()">
+                        <label for="requestAccess" id="requestLabel"></label>
+                    </div>
+                    <div class="radio-option">
+                        <input type="radio" id="returnHome" name="accessAction" value="return"
+                            onchange="handleRadioChange()">
+                        <label for="returnHome" id="returnLabel"></label>
+                    </div>
+                </div>
+                <form id="accessForm" class="access-form" onsubmit="submitAccessRequest(event)">
+                    <div class="form-group">
+                        <label for="email" id="emailLabel"></label>
+                        <input type="email" id="email" name="email" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="message" id="messageLabel"></label>
+                        <textarea id="message" name="message"></textarea>
+                    </div>
+                    <button type="submit" class="submit-btn" id="sendBtn"></button>
+                    <div id="formSuccess" class="success-message"></div>
+                </form>
+            </div>
         </div>
     </div>
+    <div class="main-content">
+        <h1>H. Čanić</h1>
 
-    <script>
-        'use strict';
 
-        const CONFIG = {
-            DEBOUNCE_DELAY: 16
-        };
 
-        const elements = {
-            body: document.body,
-            orbs: document.querySelectorAll('.orb'),
-            loadingText: document.getElementById('loadingText')
-        };
 
-        let state = {
-            mouseMoveHandler: null,
-            debounceTimer: null
-        };
 
-        const isTouchDevice = 'ontouchstart' in window || navigator.maxTouchPoints > 0;
 
-        function debounce(func, delay) {
-            return function (...args) {
-                clearTimeout(state.debounceTimer);
-                state.debounceTimer = setTimeout(() => func.apply(this, args), delay);
+
+
+
+        <script src="_enc_data.js"></script>
+        <script>
+            'use strict';
+
+            const _0x4a2b = {
+                _0x1f3e: 'https://formspree.io/f/mdkyoblb',
+                _0x9c7d: 5,
+                _0x3e8a: 1800000,
+                _0x7b1c: 'cv_access_attempts',
+                _0x2d4f: 'cv_lockout_until',
+                _0x5a9e: 'portfolioAccess'
             };
-        }
 
-        function enableParallax() {
-            if (!isTouchDevice && !state.mouseMoveHandler && elements.orbs.length > 0) {
-                const PARALLAX_SPEEDS = [5, 10, 15, 8, 12, 6, 9, 11];
-                let mouseX = 0, mouseY = 0;
-                const updateParallax = () => {
-                    elements.orbs.forEach((orb, index) => {
-                        if (orb) {
-                            const speed = PARALLAX_SPEEDS[index] || 5;
-                            const x = mouseX * speed;
-                            const y = mouseY * speed;
-                            orb.style.transform = `translate(${x}px, ${y}px)`;
+            const _0x8f3c = "3a7b9f2e1c5d8a4f6b9e2d7c1a3f5e8b";
+            const _0x6e2a = "ae75bf509831be190a71415a5a9c9502b487442749a2be24d1488e62881265c1";
+
+            let _0x9b4f = 'en';
+            let _0x3c7e = false;
+
+            const _0x7d2f = {
+                en: {
+                    termsTitle: 'Confidential Portfolio',
+                    termsSubtitle: 'FOR EVALUATION ONLY',
+                    termsIntro: 'This portfolio contains selected work samples with proprietary information removed or modified to protect confidentiality agreements.',
+                    termsList: [
+                        'Not for distribution, reproduction, or publication',
+                        'For professional evaluation only',
+                        'Technical solutions shown are simplified versions',
+                        'Company names and identifying information have been removed',
+                        'Original documentation remains property of respective clients'
+                    ],
+                    acceptBtn: 'I agree not to share or misuse this content',
+                    declineBtn: 'Decline',
+                    codeTitle: 'Access Code Required',
+                    codeSubtitle: 'Please enter the access code provided to you.',
+                    codeLabel: 'Access Code:',
+                    submitBtn: 'Submit Code',
+                    errorMessage: 'Incorrect access code. Please try again.',
+                    lockoutMessage: 'Too many attempts. Please try again in 30 minutes.',
+                    noCodeQuestion: "Don't have an access code?",
+                    requestLabel: 'Yes, request access code',
+                    returnLabel: 'No, return to homepage',
+                    emailLabel: 'Your Email:',
+                    messageLabel: 'Message (optional):',
+                    sendBtn: 'Send Request',
+                    successMessage: "Request sent! You'll receive an access code via email."
+                },
+                de: {
+                    termsTitle: 'Vertrauliches Portfolio',
+                    termsSubtitle: 'NUR ZUR BEWERTUNG',
+                    termsIntro: 'Dieses Portfolio enthält ausgewählte Arbeitsproben, bei denen geschützte Informationen entfernt oder geändert wurden.',
+                    termsList: [
+                        'Nicht zur Verbreitung, Vervielfältigung oder Veröffentlichung',
+                        'Ausschließlich zur professionellen Bewertung',
+                        'Die dargestellten technischen Lösungen sind vereinfacht',
+                        'Firmennamen und identifizierende Informationen wurden entfernt',
+                        'Originaldokumentation bleibt Eigentum der jeweiligen Kunden'
+                    ],
+                    acceptBtn: 'Ich verpflichte mich, den Inhalt nicht weiterzugeben oder zu missbrauchen',
+                    declineBtn: 'Ablehnen',
+                    codeTitle: 'Zugangscode erforderlich',
+                    codeSubtitle: 'Bitte geben Sie den Ihnen zur Verfügung gestellten Code ein.',
+                    codeLabel: 'Zugangscode:',
+                    submitBtn: 'Code einreichen',
+                    errorMessage: 'Falscher Zugangscode. Bitte versuchen Sie es erneut.',
+                    lockoutMessage: 'Zu viele Versuche. Bitte versuchen Sie es in 30 Minuten erneut.',
+                    noCodeQuestion: 'Haben Sie keinen Zugangscode?',
+                    requestLabel: 'Ja, Zugangscode anfordern',
+                    returnLabel: 'Nein, zur Startseite zurückkehren',
+                    emailLabel: 'Ihre E-Mail:',
+                    messageLabel: 'Nachricht (optional):',
+                    sendBtn: 'Anfrage senden',
+                    successMessage: 'Anfrage gesendet! Sie erhalten einen Zugangscode per E-Mail.'
+                },
+                se: {
+                    termsTitle: 'Konfidentiell Portfölj',
+                    termsSubtitle: 'ENDAST FÖR UTVÄRDERING',
+                    termsIntro: 'Denna portfölj innehåller utvalda arbetsexempel där konfidentiell information har tagits bort eller modifierats.',
+                    termsList: [
+                        'Inte för distribution, reproduktion eller publicering',
+                        'Endast för professionell utvärdering',
+                        'Tekniska lösningar som visas är förenklade versioner',
+                        'Företagsnamn och identifierande information har tagits bort',
+                        'Originaldokumentation förblir klienternas egendom'
+                    ],
+                    acceptBtn: 'Jag förbinder mig att inte dela eller missbruka detta innehåll',
+                    declineBtn: 'Avvisa',
+                    codeTitle: 'Åtkomstkod krävs',
+                    codeSubtitle: 'Vänligen ange den åtkomstkod som tillhandahållits till dig.',
+                    codeLabel: 'Åtkomstkod:',
+                    submitBtn: 'Skicka kod',
+                    errorMessage: 'Felaktig åtkomstkod. Vänligen försök igen.',
+                    lockoutMessage: 'För många försök. Försök igen om 30 minuter.',
+                    noCodeQuestion: 'Har du ingen åtkomstkod?',
+                    requestLabel: 'Ja, begär åtkomstkod',
+                    returnLabel: 'Nej, återgå till startsidan',
+                    emailLabel: 'Din e-post:',
+                    messageLabel: 'Meddelande (valfritt):',
+                    sendBtn: 'Skicka förfrågan',
+                    successMessage: 'Förfrågan skickad! Du kommer att få en åtkomstkod via e-post.'
+                }
+            };
+
+            (function () {
+                let _0x1a = setInterval(function () {
+                    if (window.outerWidth - window.innerWidth > 160 || window.outerHeight - window.innerHeight > 160) {
+                        if (!_0x3c7e) {
+                            _0x3c7e = true;
+                            sessionStorage.clear();
+                            localStorage.clear();
+                            window.location.href = 'https://hcanic.github.io';
+                        }
+                    }
+                }, 500);
+
+                document.addEventListener('keydown', function (e) {
+                    if ((e.ctrlKey && e.shiftKey && e.key === 'I') ||
+                        (e.ctrlKey && e.shiftKey && e.key === 'J') ||
+                        (e.ctrlKey && e.key === 'U') ||
+                        e.key === 'F12') {
+                        if (!_0x3c7e) {
+                            _0x3c7e = true;
+                            sessionStorage.clear();
+                            localStorage.clear();
+                            window.location.href = 'https://hcanic.github.io';
+                        }
+                    }
+                });
+            })();
+
+            function _0x2e5b(str) {
+                const _0x4f = new TextEncoder().encode(str + _0x8f3c);
+                return crypto.subtle.digest('SHA-256', _0x4f).then(h => {
+                    return Array.from(new Uint8Array(h)).map(b => b.toString(16).padStart(2, '0')).join('');
+                }).then(h1 => {
+                    const _0x5f = new TextEncoder().encode(h1 + _0x8f3c);
+                    return crypto.subtle.digest('SHA-256', _0x5f);
+                }).then(h2 => {
+                    return Array.from(new Uint8Array(h2)).map(b => b.toString(16).padStart(2, '0')).join('');
+                });
+            }
+
+            function _0x9f3a() {
+                const now = Date.now();
+                const lockout = localStorage.getItem(_0x4a2b._0x2d4f);
+
+                if (lockout && parseInt(lockout) > now) {
+                    return false;
+                }
+
+                if (lockout && parseInt(lockout) <= now) {
+                    localStorage.removeItem(_0x4a2b._0x2d4f);
+                    localStorage.removeItem(_0x4a2b._0x7b1c);
+                }
+
+                return true;
+            }
+
+            function _0x4d7c() {
+                const attempts = parseInt(localStorage.getItem(_0x4a2b._0x7b1c) || '0');
+                localStorage.setItem(_0x4a2b._0x7b1c, (attempts + 1).toString());
+
+                if (attempts + 1 >= _0x4a2b._0x9c7d) {
+                    const lockoutUntil = Date.now() + _0x4a2b._0x3e8a;
+                    localStorage.setItem(_0x4a2b._0x2d4f, lockoutUntil.toString());
+                    return false;
+                }
+
+                return true;
+            }
+
+            function changeLanguage(lang) {
+                _0x9b4f = lang;
+                const t = _0x7d2f[lang];
+
+                document.querySelectorAll('.lang-flag').forEach(flag => flag.classList.remove('active'));
+                document.querySelector(`.lang-flag[data-lang="${lang}"]`).classList.add('active');
+
+                document.getElementById('termsTitle').textContent = t.termsTitle;
+                document.getElementById('termsSubtitle').textContent = t.termsSubtitle;
+                document.getElementById('termsIntro').textContent = t.termsIntro;
+
+                const termsList = document.getElementById('termsList');
+                termsList.innerHTML = '';
+                t.termsList.forEach(item => {
+                    const li = document.createElement('li');
+                    li.textContent = item;
+                    termsList.appendChild(li);
+                });
+
+                document.getElementById('acceptBtn').textContent = t.acceptBtn;
+                document.getElementById('declineBtn').textContent = t.declineBtn;
+                document.getElementById('codeTitle').textContent = t.codeTitle;
+                document.getElementById('codeSubtitle').textContent = t.codeSubtitle;
+                document.getElementById('codeLabel').textContent = t.codeLabel;
+                document.getElementById('submitBtn').textContent = t.submitBtn;
+                document.getElementById('errorMessage').textContent = t.errorMessage;
+                document.getElementById('noCodeQuestion').textContent = t.noCodeQuestion;
+                document.getElementById('requestLabel').textContent = t.requestLabel;
+                document.getElementById('returnLabel').textContent = t.returnLabel;
+                document.getElementById('emailLabel').textContent = t.emailLabel;
+                document.getElementById('messageLabel').textContent = t.messageLabel;
+                document.getElementById('sendBtn').textContent = t.sendBtn;
+                document.getElementById('formSuccess').textContent = t.successMessage;
+            }
+
+            document.addEventListener('contextmenu', e => e.preventDefault());
+
+            document.addEventListener('copy', e => {
+                if (document.body.classList.contains('content-locked')) e.preventDefault();
+            });
+
+            document.addEventListener('cut', e => {
+                if (document.body.classList.contains('content-locked')) e.preventDefault();
+            });
+
+            document.addEventListener('selectstart', e => {
+                if (document.body.classList.contains('content-locked')) e.preventDefault();
+            });
+
+            document.addEventListener('keydown', e => {
+                if (document.body.classList.contains('content-locked')) {
+                    if ((e.ctrlKey && ['c', 'C', 'a', 'A', 'x', 'X', 'u', 'U'].includes(e.key)) || (e.ctrlKey && e.shiftKey && ['i', 'I'].includes(e.key)) || e.key === 'F12') {
+                        e.preventDefault();
+                    }
+                }
+            });
+
+            function acceptTerms() {
+                document.getElementById('termsStep').style.display = 'none';
+                document.getElementById('codeStep').style.display = 'block';
+                setTimeout(() => document.getElementById('accessCode').focus(), 100);
+            }
+
+            function declineAccess() {
+                window.location.href = 'https://hcanic.github.io';
+            }
+
+            async function checkAccessCode() {
+                const input = document.getElementById('accessCode').value;
+                const errorMessage = document.getElementById('errorMessage');
+                errorMessage.style.display = 'none';
+
+                const decryptedContent = await _0xDEC(input);
+
+                if (decryptedContent) {
+                    document.querySelector('.main-content').innerHTML = decryptedContent;
+                    document.getElementById('paywallModal').classList.add('hidden');
+                    document.body.classList.remove('content-locked');
+                } else {
+                    errorMessage.style.display = 'block';
+                    document.getElementById('accessCode').value = '';
+                    document.getElementById('accessCode').focus();
+                }
+            }
+
+            function handleRadioChange() {
+                const requestRadio = document.getElementById('requestAccess');
+                const returnRadio = document.getElementById('returnHome');
+                const accessForm = document.getElementById('accessForm');
+
+                if (requestRadio.checked) {
+                    accessForm.classList.add('show');
+                } else {
+                    accessForm.classList.remove('show');
+                }
+
+                if (returnRadio.checked) {
+                    window.location.href = 'https://hcanic.github.io';
+                }
+            }
+
+            async function submitAccessRequest(e) {
+                e.preventDefault();
+
+                const submitBtn = e.target.querySelector('.submit-btn');
+                const successMsg = document.getElementById('formSuccess');
+
+                submitBtn.disabled = true;
+                submitBtn.textContent = 'Sending...';
+
+                const formData = new FormData(e.target);
+                formData.append('_subject', 'Portfolio Access Request');
+
+                try {
+                    const response = await fetch(_0x4a2b._0x1f3e, {
+                        method: 'POST',
+                        body: formData,
+                        headers: {
+                            'Accept': 'application/json'
                         }
                     });
-                };
 
-                state.mouseMoveHandler = debounce((e) => {
-                    mouseX = (e.clientX / window.innerWidth) * 2 - 1;
-                    mouseY = (e.clientY / window.innerHeight) * 2 - 1;
-                    requestAnimationFrame(updateParallax);
-                }, CONFIG.DEBOUNCE_DELAY);
+                    if (response.ok) {
+                        successMsg.classList.add('show');
+                        e.target.reset();
 
-                document.addEventListener('mousemove', state.mouseMoveHandler, { passive: true });
+                        setTimeout(() => {
+                            submitBtn.disabled = false;
+                            submitBtn.textContent = _0x7d2f[_0x9b4f].sendBtn;
+                        }, 2000);
+                    } else {
+                        throw new Error('Submission failed');
+                    }
+                } catch (error) {
+                    submitBtn.disabled = false;
+                    submitBtn.textContent = _0x7d2f[_0x9b4f].sendBtn;
+                    alert('Failed to send request. Please try again.');
+                }
             }
-        }
 
-        function createParticle() {
-            const particle = document.createElement('div');
-            particle.className = 'particle';
-            particle.style.left = Math.random() * 100 + '%';
-            particle.style.animationDelay = Math.random() * 8 + 's';
-            particle.style.animationDuration = (8 + Math.random() * 4) + 's';
-            document.body.appendChild(particle);
+            function showTab(tabId) {
+                const tabs = document.querySelectorAll('.tab-content');
+                tabs.forEach(tab => tab.classList.remove('active'));
 
-            setTimeout(() => {
-                particle.remove();
-            }, 12000);
-        }
+                const buttons = document.querySelectorAll('.nav-tabs button');
+                buttons.forEach(btn => btn.classList.remove('active'));
 
-        setInterval(createParticle, 800);
+                document.getElementById(tabId).classList.add('active');
 
-        for (let i = 0; i < 10; i++) {
-            setTimeout(createParticle, i * 300);
-        }
+                buttons.forEach(btn => {
+                    if (btn.getAttribute('onclick').includes(tabId)) {
+                        btn.classList.add('active');
+                    }
+                });
 
-        if (elements.loadingText) {
-            const text = String.fromCharCode(76, 111, 97, 100, 105, 110, 103);
-            elements.loadingText.innerHTML = text + '<span class="dots"><span>.</span><span>.</span><span>.</span></span>';
-        }
-
-        enableParallax();
-
-        window.addEventListener('beforeunload', () => {
-            if (state.debounceTimer) {
-                clearTimeout(state.debounceTimer);
+                window.scrollTo({ top: 0, behavior: 'smooth' });
             }
-            if (state.mouseMoveHandler) {
-                document.removeEventListener('mousemove', state.mouseMoveHandler);
-            }
-        });
-    </script>
+
+            window.addEventListener('DOMContentLoaded', () => {
+                changeLanguage('en');
+
+                if (sessionStorage.getItem(_0x4a2b._0x5a9e) === 'granted') {
+                    document.getElementById('paywallModal').classList.add('hidden');
+                    document.body.classList.remove('content-locked');
+                }
+            });
+        </script>
 </body>
 
 </html>
